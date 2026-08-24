@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PX3321-T1 — Optical Front-end</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: ui-sans-serif, system-ui, sans-serif; background: #0f172a; color: #e2e8f0; margin: 2rem; }
+  h1 { font-size: 1.3rem; border-bottom: 1px solid #334155; padding-bottom: .5rem; }
+  table { border-collapse: collapse; min-width: 420px; }
+  td { padding: .45rem .9rem; border-bottom: 1px solid #1e293b; }
+  td:first-child { color: #94a3b8; }
+  .ok { color: #4ade80; font-weight: 600; }
+  .off { color: #fbbf24; }
+  button { background:#1d4ed8; color:white; border:0; padding:.5rem 1rem;
+           border-radius:6px; cursor:pointer; margin-right:.5rem; }
+</style>
+</head>
+<body>
+<h1>🔭 Optical Front-end — EN7571 LDDLA</h1>
+<table id="t"></table>
+<p>
+  <button onclick="tx('on')">TX on</button>
+  <button onclick="tx('off')">TX off</button>
+  <button onclick="load()">Refresh</button>
+</p>
+<script>
+const BASE = "/sys/bus/i2c/devices/0-0070/optical_frontend/frontend0";
+// uhttpd serves static files from /www only; the CGI mirrors sysfs as JSON.
+async function load() {
+  const r = await fetch("/cgi-bin/optical-status");
+  const j = await r.json();
+  const rows = [
+    ["Model", j.model], ["Vendor", j.vendor], ["Type", j.type],
+    ["Present", j.present ? "yes" : "no"],
+    ["Ready", j.ready ? '<span class="ok">ready ✔</span>' : "not ready"],
+    ["Protocol", j.protocol],
+    ["TX enabled", j.tx_enabled ? '<span class="ok">on</span>' : '<span class="off">off</span>'],
+    ["Bias current", (j.bias_curr ?? "n/a") + " µA"],
+    ["Alarms", j.alarms],
+  ];
+  document.getElementById("t").innerHTML =
+    rows.map(([k,v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join("");
+}
+function tx(v) { fetch("/cgi-bin/optical-status?tx=" + v).then(load); }
+load();
+setInterval(load, 5000);
+</script>
+</body>
+</html>
