@@ -81,3 +81,7 @@ en7571 0-0070: EN7571 initialised: GPON, rev 2, KT1, DDMI1
   init script must delay/retrigger the probe.
 * `zycli i2c read` cannot access the chip while the kernel driver owns the
   bus (`ERROR: open(-1)` + *"BOSA already registered I2C device"*).
+
+---
+
+[← Back to README](../README.md) · [WiFi calibration →](wifi-calibration.md)

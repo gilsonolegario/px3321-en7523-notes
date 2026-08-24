@@ -55,3 +55,7 @@ zycli reboot                   # native restart; plain reboot may no-op
 
 If the flag sector has ECC damage, tcboot treats every value as invalid and
 always falls back to primary — erase/repair the sector before swapping again.
+
+---
+
+[← Back to README](../README.md) · [Flash map →](flash-map.md)

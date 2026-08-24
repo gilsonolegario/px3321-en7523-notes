@@ -70,3 +70,7 @@ working support, and mixing kext+DriverKit builds creates two competing
 
 The failsafe window is the single most valuable recovery tool on this board:
 it works even when the installed system panics later in boot.
+
+---
+
+[← Back to README](../README.md) · [Boot chain →](boot-chain.md)

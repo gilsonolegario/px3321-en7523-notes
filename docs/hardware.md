@@ -45,3 +45,7 @@ The serial console is **UART1 at 0x1FBF0000**, exposed on header **J1**
   its own driver surface in mainline ports (`optical_frontend` class).
 * No RTC: clock starts from flash mtimes via `sysfixtime` — never trust
   absolute timestamps across boots; only deltas within one boot are real.
+
+---
+
+[← Back to README](../README.md) · [UART console →](uart.md)

@@ -53,3 +53,7 @@ rootfs directly:
 
 Always address partitions **by name**, never by number: the stock and
 OpenWrt maps shift every index after mtd2.
+
+---
+
+[← Back to README](../README.md) · [Vendor tools →](vendor-tools.md)

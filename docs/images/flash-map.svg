@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 210" font-family="ui-sans-serif,system-ui,sans-serif">
+  <rect x="0.5" y="0.5" width="759" height="209" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
   <style>
     .p{stroke:#0f172a;stroke-width:1;fill-opacity:1}
     .t{font-size:11px;text-anchor:middle}

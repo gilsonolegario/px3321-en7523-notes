@@ -42,8 +42,29 @@ and in the bootloader environment (`GponSerialNumber=...`). When testing a
 mainline port against a live ISP line, inject exactly these values through
 UCI/runtime configuration — a mismatched identity means the OLT ignores you.
 
+## Milestones
+
+Progress checkpoints for a mainline port on live fiber. When a milestone is
+reached, check it off and drop evidence (screenshots, `ponInfo` dumps — with
+serial/registration ID redacted) into `docs/images/`.
+
+- [x] Optical front-end alive: DDMI readings via `optical_frontend` sysfs
+- [x] XPON MAC block up, `/proc/xpon/ponInfo` populated (GPON mode)
+- [ ] **O1 → O3**: downstream sync + serial number transmitted to the OLT
+- [ ] **O4**: ranging complete, assignment of PLOAM/OMCC
+- [ ] **O5 — operational**: OMCI provisioning accepted, traffic flowing
+
+> [!NOTE]
+> O1–O5 are the ITU-T G.984.2 activation states shown in `ponInfo`.
+> Reaching O3 proves the physical layer; without correct provisioning
+> identity the OLT will not advance you past O5 negotiation.
+
 ## References
 
 * [hack-gpon.org](https://hack-gpon.org) — GPON reverse engineering hub
 * [pkt.wiki — EcoNet Linux](https://econet-linux.pkt.wiki)
 * OpenWrt EcoNet MIPS upstream target discussions
+
+---
+
+[← Back to README](../README.md) · [Hardware overview →](hardware.md)

@@ -82,3 +82,7 @@ The Wi-Fi MAC derives from the EEPROM bytes near offset 5–10 (Zyxel OUI
 `0C:43:26`). Ethernet is different: the bootloader passes the factory MAC
 as `ethaddr=` on the kernel command line, which mainline drivers ignore by
 default — see the platform notes for the userspace fix.
+
+---
+
+[← Back to README](../README.md) · [GPON next steps →](gpon-next-steps.md)

@@ -91,7 +91,7 @@ The reservearea holds a single ASCII flag byte at offset **+0x200000**
 * On mainline/OpenWrt without vendor tools: write the byte directly
   (requires unlocked partition access).
 
-> [!DANGER]
+> [!CAUTION]
 > A corrupted flag sector (ECC errors) makes tcboot ignore every swap —
 > the sector must be erased/repaired first. Always verify with a fresh
 > read after writing.
@@ -107,3 +107,7 @@ Starting kernel ...
 
 If the FIT hashes fail, tcboot falls back to the primary image silently —
 always confirm which image booted via `uname -r`, not by timing.
+
+---
+
+[← Back to README](../README.md) · [Bootloop forensics →](bootloop-forensics.md)

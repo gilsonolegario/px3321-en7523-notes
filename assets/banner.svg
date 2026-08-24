@@ -74,14 +74,14 @@
   <text x="80" y="178" font-size="19" fill="#94a3b8">Airoha EN7523 · GPON ONT · mainline Linux platform documentation</text>
 
   <!-- topic pills -->
-  <g font-size="12" fill="#cbd5e1" text-anchor="middle">
-    <rect x="80"  y="212" width="96"  height="26" rx="13" fill="#0f1c33" stroke="#334155"/>
-    <text x="128" y="229">GPON · DDMI</text>
-    <rect x="184" y="212" width="82"  height="26" rx="13" fill="#0f1c33" stroke="#334155"/>
-    <text x="225" y="229">HDR2 / FIT</text>
-    <rect x="274" y="212" width="106" height="26" rx="13" fill="#0f1c33" stroke="#334155"/>
-    <text x="327" y="229">LDDLA · BOSA</text>
-    <rect x="388" y="212" width="114" height="26" rx="13" fill="#0f1c33" stroke="#334155"/>
-    <text x="445" y="229">MT7916 Wi-Fi 6</text>
+  <g font-size="13.5" font-weight="500" fill="#e2e8f0" text-anchor="middle">
+    <rect x="80"  y="210" width="104" height="28" rx="14" fill="#0f1c33" stroke="#3b4a63"/>
+    <text x="132" y="228.5">GPON · DDMI</text>
+    <rect x="192" y="210" width="92"  height="28" rx="14" fill="#0f1c33" stroke="#3b4a63"/>
+    <text x="238" y="228.5">HDR2 / FIT</text>
+    <rect x="292" y="210" width="116" height="28" rx="14" fill="#0f1c33" stroke="#3b4a63"/>
+    <text x="350" y="228.5">LDDLA · BOSA</text>
+    <rect x="416" y="210" width="124" height="28" rx="14" fill="#0f1c33" stroke="#3b4a63"/>
+    <text x="478" y="228.5">MT7916 Wi-Fi 6</text>
   </g>
 </svg>

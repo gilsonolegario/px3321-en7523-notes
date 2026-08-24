@@ -70,3 +70,7 @@ walks per-net data dereferenced the wrong address.
 | `objdump -d module.ko --disassemble=symbol` | read the exact instruction and offset |
 | Kernel `Code:` line + register dump | reconstruct which pointer was NULL |
 | Two-crash comparison | same site + different offsets = ABI class, not logic bug |
+
+---
+
+[← Back to README](../README.md) · [Recovery toolbox →](recovery.md)
