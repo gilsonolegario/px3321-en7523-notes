@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="ui-sans-serif,system-ui,sans-serif">
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <style>
+    .box{fill:#f1f5f9;stroke:#475569;stroke-width:1.5;rx:6}
+    .vendor{fill:#fef3c7;stroke:#b45309}
+    .main{fill:#dbeafe;stroke:#1d4ed8}
+    .lbl{font-size:13px;fill:#0f172a;text-anchor:middle}
+    .sub{font-size:10px;fill:#475569;text-anchor:middle}
+    .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
+    .cond{font-size:11px;fill:#b45309;font-style:italic}
+  </style>
+
+  <rect class="box vendor" x="20" y="40" width="120" height="52"/>
+  <text class="lbl" x="80" y="62">BootROM</text>
+  <text class="sub" x="80" y="78">EN7523</text>
+
+  <rect class="box vendor" x="180" y="40" width="120" height="52"/>
+  <text class="lbl" x="240" y="62">ATF</text>
+  <text class="sub" x="240" y="78">DRAM init · PSCI</text>
+
+  <rect class="box vendor" x="340" y="40" width="140" height="52"/>
+  <text class="lbl" x="410" y="56">zloader / tcboot</text>
+  <text class="sub" x="410" y="72">U-Boot 2014.04 + ZHAL</text>
+  <text class="sub" x="410" y="85">reads bootflag @RA+0x200000</text>
+
+  <rect class="box" x="540" y="15" width="90" height="44"/>
+  <text class="lbl" x="585" y="34">flag = '0'</text>
+  <text class="sub" x="585" y="50">primary</text>
+
+  <rect class="box main" x="650" y="15" width="90" height="44"/>
+  <text class="lbl" x="695" y="34">flag = '1'</text>
+  <text class="sub" x="695" y="50">slave ← OpenWrt</text>
+
+  <rect class="box main" x="240" y="150" width="280" height="60"/>
+  <text class="lbl" x="380" y="172">HDR2 header + ECONET FIT</text>
+  <text class="sub" x="380" y="190">kernel@1 lzma · fdt@1 · filesystem@1 squashfs</text>
+  <text class="sub" x="380" y="204">load/entry 0x80208000 · CRC32buf + headerChksum</text>
+
+  <rect class="box main" x="240" y="240" width="280" height="44"/>
+  <text class="lbl" x="380" y="262">Linux 6.x — mainline</text>
+  <text class="sub" x="380" y="278">root=/dev/mtdblock6 injected by bootloader</text>
+
+  <line class="arr" x1="140" y1="66" x2="176" y2="66"/>
+  <line class="arr" x1="300" y1="66" x2="336" y2="66"/>
+  <line class="arr" x1="480" y1="55" x2="536" y2="45"/>
+  <line class="arr" x1="630" y1="37" x2="646" y2="37"/>
+  <path class="arr" d="M 585 59 C 585 110, 450 130, 400 146"/>
+  <path class="arr" d="M 695 59 C 695 110, 420 135, 392 146"/>
+  <line class="arr" x1="380" y1="210" x2="380" y2="236"/>
+
+  <text class="cond" x="500" y="128">bootflag==1 --&gt; booting from second image</text>
+</svg>
