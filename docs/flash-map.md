@@ -1,4 +1,6 @@
-# Flash Map
+# 💾 Flash Map
+
+[← Back to README](../README.md) · [Vendor tools →](vendor-tools.md)
 
 256 MiB SPI-NAND (Micron), read through the airoha SNFI controller.
 
@@ -33,10 +35,10 @@
 
 Everything else reads as erased (`FF`).
 
-!!! note
-    The EEPROM blob is the **only** radio calibration stored here: power
-    tables and per-unit IDs live in the first kilobyte; there is **no WiFi
-    precal data** anywhere on this SKU (flag `0x19A = 0x00`).
+> [!NOTE]
+> The EEPROM blob is the **only** radio calibration stored here: power
+> tables and per-unit IDs live in the first kilobyte; there is **no WiFi
+> precal data** anywhere on this SKU (flag `0x19A = 0x00`).
 
 ## OpenWrt/mainline layout — 14 partitions
 

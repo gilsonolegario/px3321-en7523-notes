@@ -1,4 +1,6 @@
-# The LDDLA / BOSA Optical Front-end
+# 💡 The LDDLA / BOSA Optical Front-end
+
+[← Back to README](../README.md) · [WiFi calibration →](wifi-calibration.md)
 
 The GPON optical transceiver is not a pluggable SFP — it is a **BOSA**
 (Bidirectional Optical Sub-Assembly) bonded to the main PCB and driven by a
@@ -67,10 +69,10 @@ en7571 0-0070: EN7571 initialised: GPON, rev 2, KT1, DDMI1
     hwmon/ → laser bias current sensor
 ```
 
-!!! warning "Per-unit data"
-    The BOB contains **this unit's** laser bias and power settings
-    (Iav/Imod/Pav). Copying another unit's blob may mis-bias your laser.
-    Extract your own from reservearea; publish the *format*, not blobs.
+> [!WARNING] Per-unit data
+> The BOB contains **this unit's** laser bias and power settings
+> (Iav/Imod/Pav). Copying another unit's blob may mis-bias your laser.
+> Extract your own from reservearea; publish the *format*, not blobs.
 
 ## Gotchas
 

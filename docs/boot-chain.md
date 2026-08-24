@@ -1,4 +1,6 @@
-# Boot Chain
+# ⛓️ Boot Chain
+
+[← Back to README](../README.md) · [Flash map →](flash-map.md)
 
 ```mermaid
 flowchart LR

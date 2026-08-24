@@ -1,4 +1,6 @@
-# Bootloop Forensics — A Case Study
+# 🔬 Bootloop Forensics — A Case Study
+
+[← Back to README](../README.md) · [Recovery toolbox →](recovery.md)
 
 After flashing a new image, the device entered a boot loop: full kernel
 boot, userspace starting, then a panic ~42 s in, forever. This page documents

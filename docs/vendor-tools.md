@@ -1,4 +1,6 @@
-# Vendor Toolbox
+# 🧰 Vendor Toolbox
+
+[← Back to README](../README.md) · [Optical BOB →](optical-bob.md)
 
 The stock firmware ships a set of small binaries that are far more useful
 than their names suggest. All live in `/bin` or `/usr/bin`.

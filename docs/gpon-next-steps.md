@@ -1,4 +1,6 @@
-# GPON / xPON Next Steps
+# 🌐 GPON / xPON Next Steps
+
+[← Back to README](../README.md) · [Hardware overview →](hardware.md)
 
 Bringing fiber connectivity up on mainline is the last big milestone.
 The drivers are present (`AIROHA_XPON`, optical front-end); what remains is

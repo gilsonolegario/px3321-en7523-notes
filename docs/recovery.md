@@ -1,4 +1,6 @@
-# Recovery Toolbox
+# 🚑 Recovery Toolbox
+
+[← Back to README](../README.md) · [Bootloop forensics →](bootloop-forensics.md)
 
 Three independent ways back from a broken flash — learn all three before
 writing anything to NAND.
@@ -89,10 +91,10 @@ The reservearea holds a single ASCII flag byte at offset **+0x200000**
 * On mainline/OpenWrt without vendor tools: write the byte directly
   (requires unlocked partition access).
 
-!!! danger
-    A corrupted flag sector (ECC errors) makes tcboot ignore every swap —
-    the sector must be erased/repaired first. Always verify with a fresh
-    read after writing.
+> [!DANGER]
+> A corrupted flag sector (ECC errors) makes tcboot ignore every swap —
+> the sector must be erased/repaired first. Always verify with a fresh
+> read after writing.
 
 ## What the console shows when it works
 

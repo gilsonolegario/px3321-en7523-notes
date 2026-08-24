@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-label="Zyxel PX3321-T1 — Airoha EN7523 GPON ONT platform notes" font-family="ui-sans-serif,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1020"/>
+      <stop offset="0.55" stop-color="#0d1730"/>
+      <stop offset="1" stop-color="#0a1a24"/>
+    </linearGradient>
+    <linearGradient id="chipGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#182747"/>
+      <stop offset="1" stop-color="#101b33"/>
+    </linearGradient>
+    <linearGradient id="fiber1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#164e63"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+    <linearGradient id="fiber2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#14532d"/>
+      <stop offset="1" stop-color="#34d399"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#38bdf8"/>
+    </pattern>
+  </defs>
+
+  <!-- background -->
+  <rect width="1200" height="300" fill="url(#bg)"/>
+  <rect width="1200" height="300" fill="url(#dots)" opacity="0.07"/>
+
+  <!-- fiber strands flowing into the chip -->
+  <g filter="url(#glow)" fill="none" stroke-linecap="round">
+    <path d="M -10 238 C 240 236 520 186 846 88"  stroke="url(#fiber1)" stroke-width="2"   opacity="0.45"/>
+    <path d="M -10 250 C 260 246 520 210 846 120" stroke="url(#fiber1)" stroke-width="2.6" opacity="0.65"/>
+    <path d="M -10 262 C 280 258 520 234 846 154" stroke="url(#fiber2)" stroke-width="2.6" opacity="0.65"/>
+    <circle cx="330" cy="235" r="4"   fill="#a5f3fc" opacity="0.9"/>
+    <circle cx="560" cy="205" r="3.2" fill="#a7f3d0" opacity="0.9"/>
+    <circle cx="720" cy="176" r="3.6" fill="#67e8f9" opacity="0.95"/>
+  </g>
+
+  <!-- chip -->
+  <g>
+    <!-- pins -->
+    <g fill="#334155">
+      <rect x="850" y="90"  width="30" height="10" rx="2"/>
+      <rect x="850" y="130" width="30" height="10" rx="2"/>
+      <rect x="850" y="170" width="30" height="10" rx="2"/>
+      <rect x="850" y="210" width="30" height="10" rx="2"/>
+      <rect x="1050" y="90"  width="30" height="10" rx="2"/>
+      <rect x="1050" y="130" width="30" height="10" rx="2"/>
+      <rect x="1050" y="170" width="30" height="10" rx="2"/>
+      <rect x="1050" y="210" width="30" height="10" rx="2"/>
+      <rect x="900" y="34" width="10" height="30" rx="2"/>
+      <rect x="940" y="34" width="10" height="30" rx="2"/>
+      <rect x="980" y="34" width="10" height="30" rx="2"/>
+      <rect x="1020" y="34" width="10" height="30" rx="2"/>
+      <rect x="900" y="246" width="10" height="30" rx="2"/>
+      <rect x="940" y="246" width="10" height="30" rx="2"/>
+      <rect x="980" y="246" width="10" height="30" rx="2"/>
+      <rect x="1020" y="246" width="10" height="30" rx="2"/>
+    </g>
+    <rect x="880" y="64" width="170" height="182" rx="16" fill="url(#chipGrad)" stroke="#3b82f6" stroke-opacity="0.65" stroke-width="1.6"/>
+    <rect x="894" y="78" width="142" height="154" rx="10" fill="none" stroke="#22d3ee" stroke-opacity="0.25" stroke-width="1"/>
+    <text x="965" y="148" text-anchor="middle" font-size="32" font-weight="700" fill="#e2e8f0" letter-spacing="1">EN7523</text>
+    <text x="965" y="174" text-anchor="middle" font-size="11" fill="#7dd3fc" letter-spacing="2">DUAL CORTEX-A53</text>
+    <text x="965" y="196" text-anchor="middle" font-size="10" fill="#64748b" letter-spacing="3">GPON SoC</text>
+  </g>
+
+  <!-- headline block -->
+  <text x="80" y="76" font-size="13" font-weight="600" fill="#22d3ee" letter-spacing="3.5">COMMUNITY REVERSE-ENGINEERING NOTES</text>
+  <text x="76" y="138" font-size="56" font-weight="800" fill="#f8fafc" letter-spacing="-0.5">Zyxel PX3321-T1</text>
+  <text x="80" y="178" font-size="19" fill="#94a3b8">Airoha EN7523 · GPON ONT · mainline Linux platform documentation</text>
+
+  <!-- topic pills -->
+  <g font-size="12" fill="#cbd5e1" text-anchor="middle">
+    <rect x="80"  y="212" width="96"  height="26" rx="13" fill="#0f1c33" stroke="#334155"/>
+    <text x="128" y="229">GPON · DDMI</text>
+    <rect x="184" y="212" width="82"  height="26" rx="13" fill="#0f1c33" stroke="#334155"/>
+    <text x="225" y="229">HDR2 / FIT</text>
+    <rect x="274" y="212" width="106" height="26" rx="13" fill="#0f1c33" stroke="#334155"/>
+    <text x="327" y="229">LDDLA · BOSA</text>
+    <rect x="388" y="212" width="114" height="26" rx="13" fill="#0f1c33" stroke="#334155"/>
+    <text x="445" y="229">MT7916 Wi-Fi 6</text>
+  </g>
+</svg>

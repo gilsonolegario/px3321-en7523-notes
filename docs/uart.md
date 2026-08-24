@@ -1,4 +1,6 @@
-# UART Console
+# 🖥️ UART Console
+
+[← Back to README](../README.md) · [Boot chain →](boot-chain.md)
 
 The serial console is **UART1** (`0x1FBF0000`, ns16550-compatible),
 **115200 8N1**, **3.3 V logic**.
@@ -23,11 +25,11 @@ with one **empty slot** separating ground from the signal group:
 | 4 | **RX** (host → board) | Connect to adapter TX |
 | 5 | **VCC** | 3.3 V — leave unconnected |
 
-!!! warning
-    * Never feed 5 V into any of these pads.
-    * You do **not** need VCC for serial — the adapter is self-powered from USB.
-    * Swapping TX/RX by mistake is harmless (no data flows); wrong polarity
-      costs nothing but silence.
+> [!WARNING]
+> * Never feed 5 V into any of these pads.
+> * You do **not** need VCC for serial — the adapter is self-powered from USB.
+> * Swapping TX/RX by mistake is harmless (no data flows); wrong polarity
+>   costs nothing but silence.
 
 ## Discovery method (how this pinout was confirmed)
 

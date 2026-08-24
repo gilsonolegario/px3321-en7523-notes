@@ -1,4 +1,6 @@
-# Hardware Overview
+# 🔧 Hardware Overview
+
+[← Back to README](../README.md) · [UART console →](uart.md)
 
 | Component | Detail |
 |---|---|
@@ -27,9 +29,9 @@
 The `airoha-cpufreq` driver reports package `EN7529CT`, maximum **1.0 GHz**.
 Governors available: `conservative`, `ondemand`, `powersave`, `performance`.
 
-!!! tip
-    Pinning `performance` early in boot saves several seconds of wall time —
-    the default `ondemand` governor ramps too slowly for short-lived boot work.
+> [!TIP]
+> Pinning `performance` early in boot saves several seconds of wall time —
+> the default `ondemand` governor ramps too slowly for short-lived boot work.
 
 ## UART console
 
