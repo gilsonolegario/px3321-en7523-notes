@@ -4,11 +4,11 @@
     <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#334155"/></marker>
   </defs>
   <style>
-    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
-    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
-    .sub{font-size:12px;fill:#334155;text-anchor:middle}
-    .ann{font-size:12px;fill:#92400e;font-style:italic;text-anchor:middle}
-    .bus{font-size:12px;fill:#334155;font-weight:bold;text-anchor:middle}
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle;stroke:none}
+    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold;stroke:none}
+    .sub{font-size:12px;fill:#334155;text-anchor:middle;stroke:none}
+    .ann{font-size:12px;fill:#92400e;font-style:italic;text-anchor:middle;stroke:none}
+    .bus{font-size:12px;fill:#334155;font-weight:bold;text-anchor:middle;stroke:none}
     .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
   </style>
 

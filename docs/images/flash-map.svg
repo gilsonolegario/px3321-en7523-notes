@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 310" font-family="Helvetica, Arial, sans-serif">
   <rect x="0.5" y="0.5" width="759" height="309" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
   <style>
-    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle;stroke:none}
     .cell{stroke:#475569;stroke-width:1}
-    .in{font-size:14px;fill:#0f172a;text-anchor:middle}
-    .ext{font-size:13px;fill:#334155;text-anchor:middle;font-weight:bold}
-    .ann{font-size:12px;fill:#334155}
+    .in{font-size:14px;fill:#0f172a;text-anchor:middle;stroke:none}
+    .ext{font-size:13px;fill:#334155;text-anchor:middle;font-weight:bold;stroke:none}
+    .ann{font-size:12px;fill:#334155;stroke:none}
     .tick{stroke:#334155;stroke-width:1}
   </style>
 

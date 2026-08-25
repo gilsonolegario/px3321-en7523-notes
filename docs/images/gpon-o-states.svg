@@ -6,19 +6,19 @@
     </marker>
   </defs>
   <style>
-    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle;stroke:none}
     .box{stroke-width:1.5}
     .idle{fill:#f1f5f9;stroke:#475569}
     .prog{fill:#fef3c7;stroke:#b45309}
     .op{fill:#dcfce7;stroke:#166534}
-    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
-    .sub{font-size:12px;fill:#334155;text-anchor:middle}
+    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold;stroke:none}
+    .sub{font-size:12px;fill:#334155;text-anchor:middle;stroke:none}
     .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
     .band{rx:6;stroke-width:1.5}
     .ok{fill:#dbeafe;stroke:#1d4ed8}
     .miss{fill:#fef3c7;stroke:#b45309}
-    .bt{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
-    .note{font-size:13px;fill:#92400e;font-style:italic;text-anchor:middle}
+    .bt{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold;stroke:none}
+    .note{font-size:13px;fill:#92400e;font-style:italic;text-anchor:middle;stroke:none}
   </style>
 
   <text class="title" x="380" y="28">GPON activation states — ITU-T G.984.2</text>

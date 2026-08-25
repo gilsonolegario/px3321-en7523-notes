@@ -4,11 +4,11 @@
     <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#334155"/></marker>
   </defs>
   <style>
-    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
-    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
-    .sub{font-size:12px;fill:#334155;text-anchor:middle}
-    .ann{font-size:12px;fill:#334155}
-    .warn{font-size:13px;fill:#7f1d1d;text-anchor:middle}
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle;stroke:none}
+    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold;stroke:none}
+    .sub{font-size:12px;fill:#334155;text-anchor:middle;stroke:none}
+    .ann{font-size:12px;fill:#334155;stroke:none}
+    .warn{font-size:13px;fill:#7f1d1d;text-anchor:middle;stroke:none}
   </style>
 
   <text class="title" x="380" y="28">RT30xxEEPROM.bin — 208 896 bytes (0x33000)</text>

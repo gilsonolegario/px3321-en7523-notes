@@ -6,16 +6,16 @@
     </marker>
   </defs>
   <style>
-    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle;stroke:none}
     .q{fill:#ffffff;stroke:#475569;stroke-width:1.5;rx:6}
     .ok{fill:#dcfce7;stroke:#166534;stroke-width:1.5;rx:6}
     .warn{fill:#fef3c7;stroke:#b45309;stroke-width:1.5;rx:6}
     .alt{fill:#dbeafe;stroke:#1d4ed8;stroke-width:1.5;rx:6}
     .bad{fill:#fecaca;stroke:#b91c1c;stroke-width:1.5;rx:6}
-    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
-    .sub{font-size:12px;fill:#334155;text-anchor:middle}
-    .yes{font-size:13px;fill:#166534;font-weight:bold;text-anchor:middle}
-    .no{font-size:13px;fill:#b91c1c;font-weight:bold;text-anchor:middle}
+    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold;stroke:none}
+    .sub{font-size:12px;fill:#334155;text-anchor:middle;stroke:none}
+    .yes{font-size:13px;fill:#166534;font-weight:bold;text-anchor:middle;stroke:none}
+    .no{font-size:13px;fill:#b91c1c;font-weight:bold;text-anchor:middle;stroke:none}
     .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
   </style>
 

@@ -6,13 +6,13 @@
     </marker>
   </defs>
   <style>
-    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle;stroke:none}
     .box{fill:#f1f5f9;stroke:#475569;stroke-width:1.5}
     .vendor{fill:#fef3c7;stroke:#b45309}
     .main{fill:#dbeafe;stroke:#1d4ed8}
-    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
-    .sub{font-size:12px;fill:#334155;text-anchor:middle}
-    .cond{font-size:12px;fill:#92400e;font-style:italic;text-anchor:middle}
+    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold;stroke:none}
+    .sub{font-size:12px;fill:#334155;text-anchor:middle;stroke:none}
+    .cond{font-size:12px;fill:#92400e;font-style:italic;text-anchor:middle;stroke:none}
     .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
   </style>
 
