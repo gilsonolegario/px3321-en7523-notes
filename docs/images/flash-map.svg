@@ -47,7 +47,6 @@
   <text class="ext" x="727" y="230">RA</text>
 
   <!-- Annotations tied to rows -->
-  <text class="ann" x="20" y="254">wwan present but never populated (all FF) · rom-d: vendor writes proline backup here on stock</text>
-  <text class="ann" x="20" y="274">RA: 4KB EEPROM @0x4C000 · BOB laser table @0x140000 · bootflag byte @0x200000</text>
-  <text class="ann" x="20" y="294">OpenWrt DTS splits tclinux_slave into kernel_slave / rootfs_slave / rootfs_data</text>
+  <text class="ann" x="20" y="254">wwan unpopulated (all FF) · rom-d: proline backup on stock · RA: EEPROM @0x4C000, BOB table @0x140000, bootflag @0x200000</text>
+  <text class="ann" x="20" y="274">OpenWrt DTS splits tclinux_slave into kernel_slave / rootfs_slave / rootfs_data</text>
 </svg>

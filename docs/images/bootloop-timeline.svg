@@ -15,7 +15,7 @@
     .crash{fill:#fecaca;stroke:#b91c1c}
     .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
     .sub{font-size:12px;fill:#334155;text-anchor:middle}
-    .t{font-size:12px;fill:#334155;font-weight:bold;text-anchor:middle}
+    .t{font-size:13px;fill:#334155;font-weight:bold;text-anchor:middle}
     .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
     .loop{stroke:#b91c1c;stroke-width:1.5;fill:none;marker-end:url(#r);stroke-dasharray:5 3}
     .ded{fill:#dcfce7;stroke:#166534;stroke-width:1.5}
@@ -62,7 +62,7 @@
   <text class="t" x="522" y="234">42 s</text>
 
   <g class="box crash">
-    <rect x="588" y="56" width="166" height="100"/>
+    <rect x="584" y="56" width="174" height="100"/>
     <text class="lbl" x="671" y="78" fill="#b91c1c">KERNEL PANIC</text>
     <text class="sub" x="671" y="97">cfg80211 NULL deref @0x1</text>
     <text class="sub" x="671" y="113">nf_tables @0x83c</text>

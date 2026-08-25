@@ -44,8 +44,8 @@
   <text class="lbl" x="400" y="88" fill="#7f1d1d">VCC</text>
   <text class="sub" x="400" y="106" fill="#7f1d1d">3.3 V</text>
 
-  <text class="sub" x="88"  y="146">physically separated</text>
-  <text class="sub" x="166" y="170" font-style="italic">unpopulated slot</text>
+  <text class="sub" x="88"  y="146" font-size="13">physically separated</text>
+  <text class="sub" x="166" y="170" font-size="13" font-style="italic">unpopulated slot</text>
   <text class="warn" x="400" y="152">3.3 V ONLY — never 5 V</text>
 
   <!-- Wiring crossover -->

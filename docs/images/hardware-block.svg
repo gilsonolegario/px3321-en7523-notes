@@ -54,7 +54,7 @@
   <path class="arr" d="M320,296 L320,322 L145,322 L145,348"/>
   <text class="bus" x="232" y="318">i2c0</text>
   <line class="arr" x1="380" y1="296" x2="380" y2="348"/>
-  <text class="bus" x="396" y="320" text-anchor="start">SPI-NAND / SNFI</text>
+  <text class="bus" x="388" y="342" text-anchor="start">SPI-NAND / SNFI</text>
   <path class="arr" d="M440,296 L440,322 L618,322 L618,348"/>
   <text class="bus" x="530" y="318">UART1</text>
 
