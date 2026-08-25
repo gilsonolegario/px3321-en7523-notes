@@ -1,56 +1,60 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 430" font-family="ui-sans-serif,system-ui,sans-serif">
-  <rect x="0.5" y="0.5" width="759" height="429" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 450" font-family="ui-sans-serif,system-ui,sans-serif">
+  <rect x="0.5" y="0.5" width="759" height="449" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
   <defs>
     <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#334155"/></marker>
   </defs>
+  <style>
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
+    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
+    .sub{font-size:12px;fill:#334155;text-anchor:middle}
+    .warn{font-size:13px;fill:#7f1d1d;text-anchor:middle;font-weight:bold}
+    .ok{font-size:14px;fill:#14532d;text-anchor:middle;font-weight:bold}
+    .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
+  </style>
 
-  <text x="380" y="24" text-anchor="middle" font-size="13" fill="#0f172a">BOB calibration table — extraction and load flow</text>
+  <text class="title" x="380" y="28">BOB calibration table — extraction and load flow</text>
 
   <!-- Vendor source (amber) -->
-  <rect x="30" y="40" width="330" height="64" rx="8" fill="#fef3c7" stroke="#b45309"/>
-  <text x="195" y="62" text-anchor="middle" font-size="13" fill="#0f172a">reservearea partition @ offset +0x140000</text>
-  <text x="195" y="80" text-anchor="middle" font-size="10.5" fill="#475569">proline factory struct · magic 0x07050701 @ +0x94</text>
-  <text x="195" y="94" text-anchor="middle" font-size="10.5" fill="#475569">vendor / per-unit laser cal</text>
+  <rect x="30" y="46" width="330" height="66" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <text class="lbl" x="195" y="68">reservearea @ +0x140000</text>
+  <text class="sub" x="195" y="86">proline struct · magic 0x07050701 @ +0x94</text>
+  <text class="sub" x="195" y="103">vendor / per-unit laser cal</text>
 
   <!-- Extract + pad -->
-  <line x1="360" y1="72" x2="430" y2="72" stroke="#334155" marker-end="url(#a)"/>
-  <rect x="436" y="40" width="294" height="64" rx="8" fill="#ffffff" stroke="#475569"/>
-  <text x="583" y="62" text-anchor="middle" font-size="13" fill="#0f172a">dd extract (~225 B) → FF-pad to 400 B</text>
-  <text x="583" y="80" text-anchor="middle" font-size="10.5" fill="#475569">prolinecmd mt7570bob get (stock)</text>
-  <text x="583" y="94" text-anchor="middle" font-size="10.5" fill="#475569">tail padded with 0xFF bytes</text>
+  <line class="arr" x1="364" y1="79" x2="426" y2="79"/>
+  <rect x="432" y="46" width="298" height="66" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+  <text class="lbl" x="581" y="68">dd extract (~225 B) → FF-pad to 400 B</text>
+  <text class="sub" x="581" y="86">prolinecmd mt7570bob get (stock)</text>
+  <text class="sub" x="581" y="103">tail padded with 0xFF bytes</text>
 
   <!-- Firmware file -->
-  <line x1="583" y1="104" x2="583" y2="124" stroke="#334155" marker-end="url(#a)"/>
-  <rect x="215" y="130" width="330" height="38" rx="8" fill="#ffffff" stroke="#475569"/>
-  <text x="380" y="154" text-anchor="middle" font-size="13" fill="#0f172a">/lib/firmware/airoha/en7571_bob.bin</text>
+  <line class="arr" x1="581" y1="112" x2="581" y2="132"/>
+  <path class="arr" d="M 581 136 C 581 158, 480 160, 400 162"/>
+  <rect x="205" y="150" width="350" height="40" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+  <text class="lbl" x="380" y="175">/lib/firmware/airoha/en7571_bob.bin</text>
 
   <!-- Warning box -->
-  <line x1="380" y1="168" x2="380" y2="186" stroke="#334155" marker-end="url(#a)"/>
-  <rect x="60" y="192" width="640" height="48" rx="8" fill="#fecaca" stroke="#b91c1c"/>
-  <text x="380" y="212" text-anchor="middle" font-size="12" fill="#7f1d1d">driver is built-in and probes BEFORE the overlay mounts</text>
-  <text x="380" y="228" text-anchor="middle" font-size="11" fill="#7f1d1d">needs re-probe: sysfs unbind/bind or init script</text>
+  <line class="arr" x1="380" y1="190" x2="380" y2="208"/>
+  <rect x="60" y="214" width="640" height="52" rx="8" fill="#fecaca" stroke="#b91c1c" stroke-width="1.5"/>
+  <text class="warn" x="380" y="236">driver is built-in and probes BEFORE the overlay mounts</text>
+  <text class="sub" x="380" y="256" fill="#7f1d1d">needs re-probe: sysfs unbind/bind or init script</text>
 
   <!-- Success -->
-  <line x1="380" y1="240" x2="380" y2="256" stroke="#334155" marker-end="url(#a)"/>
-  <rect x="150" y="262" width="460" height="32" rx="8" fill="#dcfce7" stroke="#166534"/>
-  <text x="380" y="283" text-anchor="middle" font-size="13" fill="#14532d">EN7571 initialised: GPON rev 2 KT1 DDMI1</text>
-
-  <!-- DDMI readings -->
-  <line x1="380" y1="294" x2="380" y2="308" stroke="#334155" marker-end="url(#a)"/>
-  <rect x="185" y="314" width="390" height="30" rx="8" fill="#dcfce7" stroke="#166534"/>
-  <text x="380" y="334" text-anchor="middle" font-size="13" fill="#14532d">DDMI readings live: Iav / Imod / Pav</text>
+  <line class="arr" x1="380" y1="266" x2="380" y2="282"/>
+  <rect x="130" y="288" width="500" height="36" rx="8" fill="#dcfce7" stroke="#166534" stroke-width="1.5"/>
+  <text class="ok" x="380" y="311">EN7571 initialised · DDMI readings live: Iav / Imod / Pav</text>
 
   <!-- Physical chain (bottom band) -->
-  <text x="380" y="372" text-anchor="middle" font-size="11" fill="#475569">physical chain:</text>
-  <rect x="115" y="378" width="140" height="34" rx="8" fill="#dbeafe" stroke="#1d4ed8"/>
-  <text x="185" y="394" text-anchor="middle" font-size="11" fill="#0f172a">EN7523 i2c0 bus</text>
-  <text x="185" y="406" text-anchor="middle" font-size="10" fill="#475569">@ address 0x70</text>
-  <line x1="255" y1="395" x2="291" y2="395" stroke="#334155" marker-end="url(#a)"/>
-  <rect x="297" y="378" width="130" height="34" rx="8" fill="#dbeafe" stroke="#1d4ed8"/>
-  <text x="362" y="394" text-anchor="middle" font-size="11" fill="#0f172a">EN7571 LDDLA chip</text>
-  <text x="362" y="406" text-anchor="middle" font-size="10" fill="#475569">laser driver</text>
-  <line x1="427" y1="395" x2="463" y2="395" stroke="#334155" marker-end="url(#a)"/>
-  <rect x="469" y="378" width="160" height="34" rx="8" fill="#dbeafe" stroke="#1d4ed8"/>
-  <text x="549" y="394" text-anchor="middle" font-size="11" fill="#0f172a">BOSA</text>
-  <text x="549" y="406" text-anchor="middle" font-size="10" fill="#475569">laser + photodiode</text>
+  <text class="sub" x="380" y="352">physical chain:</text>
+  <rect x="105" y="362" width="160" height="52" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text class="sub" x="185" y="383" font-weight="bold">EN7523 i2c0 bus</text>
+  <text class="sub" x="185" y="401">@ address 0x70</text>
+  <line class="arr" x1="269" y1="388" x2="301" y2="388"/>
+  <rect x="305" y="362" width="170" height="52" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text class="sub" x="390" y="383" font-weight="bold">EN7571 LDDLA chip</text>
+  <text class="sub" x="390" y="401">laser driver</text>
+  <line class="arr" x1="479" y1="388" x2="511" y2="388"/>
+  <rect x="515" y="362" width="160" height="52" rx="8" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text class="sub" x="595" y="383" font-weight="bold">BOSA</text>
+  <text class="sub" x="595" y="401">laser + photodiode</text>
 </svg>

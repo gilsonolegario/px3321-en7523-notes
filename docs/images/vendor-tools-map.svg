@@ -1,72 +1,78 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 384" font-family="ui-sans-serif,system-ui,sans-serif">
-  <rect x="0.5" y="0.5" width="759" height="383" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" font-family="ui-sans-serif,system-ui,sans-serif">
+  <rect x="0.5" y="0.5" width="759" height="399" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
   <defs>
     <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#334155"/></marker>
   </defs>
+  <style>
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
+    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
+    .sub{font-size:12px;fill:#334155;text-anchor:middle}
+    .col{font-size:13px;fill:#334155;text-anchor:middle;font-style:italic}
+    .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
+  </style>
 
-  <text x="380" y="26" text-anchor="middle" font-size="13" fill="#0f172a">Stock firmware toolbox — binary / symlink map</text>
+  <text class="title" x="380" y="28">Stock firmware toolbox — binary / symlink map</text>
 
   <!-- Symlink column -->
-  <text x="110" y="52" text-anchor="middle" font-size="11" fill="#475569" font-style="italic">commands that resolve to one binary</text>
+  <text class="col" x="110" y="54">one binary, many names</text>
 
-  <rect x="30" y="62" width="160" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/>
-  <text x="110" y="79" text-anchor="middle" font-size="12" fill="#0f172a">sys</text>
-  <rect x="30" y="94" width="160" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/>
-  <text x="110" y="111" text-anchor="middle" font-size="12" fill="#0f172a">wan / ethwanctl</text>
-  <rect x="30" y="126" width="160" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/>
-  <text x="110" y="143" text-anchor="middle" font-size="12" fill="#0f172a">wlan</text>
-  <rect x="30" y="158" width="160" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/>
-  <text x="110" y="175" text-anchor="middle" font-size="12" fill="#0f172a">Ethctl</text>
-  <rect x="30" y="190" width="160" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/>
-  <text x="110" y="207" text-anchor="middle" font-size="12" fill="#0f172a">dns</text>
-  <rect x="30" y="222" width="160" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/>
-  <text x="110" y="239" text-anchor="middle" font-size="12" fill="#0f172a">pppoectl</text>
-  <rect x="30" y="254" width="160" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/>
-  <text x="110" y="271" text-anchor="middle" font-size="12" fill="#0f172a">vcautohuntctl</text>
+  <rect x="30" y="64" width="160" height="28" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text class="sub" x="110" y="83" font-weight="bold">sys</text>
+  <rect x="30" y="98" width="160" height="28" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text class="sub" x="110" y="117" font-weight="bold">wan / ethwanctl</text>
+  <rect x="30" y="132" width="160" height="28" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text class="sub" x="110" y="151" font-weight="bold">wlan</text>
+  <rect x="30" y="166" width="160" height="28" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text class="sub" x="110" y="185" font-weight="bold">Ethctl</text>
+  <rect x="30" y="200" width="160" height="28" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text class="sub" x="110" y="219" font-weight="bold">dns</text>
+  <rect x="30" y="234" width="160" height="28" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text class="sub" x="110" y="253" font-weight="bold">pppoectl</text>
+  <rect x="30" y="268" width="160" height="28" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text class="sub" x="110" y="287" font-weight="bold">vcautohuntctl</text>
 
   <!-- zycli hub -->
-  <rect x="252" y="140" width="204" height="84" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
-  <text x="354" y="164" text-anchor="middle" font-size="13" fill="#0f172a">/bin/zycli</text>
-  <text x="354" y="182" text-anchor="middle" font-size="10.5" fill="#475569">135 KB multi-tool</text>
-  <text x="354" y="202" text-anchor="middle" font-size="11" fill="#b45309" font-style="italic">behavior by argv[0]</text>
+  <rect x="250" y="140" width="210" height="90" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <text class="lbl" x="355" y="164">/bin/zycli</text>
+  <text class="sub" x="355" y="182">135 KB multi-tool</text>
+  <text class="sub" x="355" y="204" font-style="italic" font-weight="bold">behavior by argv[0]</text>
 
-  <line x1="194" y1="75"  x2="248" y2="154" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <line x1="194" y1="107" x2="248" y2="164" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <line x1="194" y1="139" x2="248" y2="174" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <line x1="194" y1="171" x2="248" y2="184" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <line x1="194" y1="203" x2="248" y2="194" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <line x1="194" y1="235" x2="248" y2="204" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <line x1="194" y1="267" x2="248" y2="214" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="arr" x1="194" y1="78"  x2="246" y2="156"/>
+  <line class="arr" x1="194" y1="112" x2="246" y2="168"/>
+  <line class="arr" x1="194" y1="146" x2="246" y2="180"/>
+  <line class="arr" x1="194" y1="180" x2="246" y2="190"/>
+  <line class="arr" x1="194" y1="214" x2="246" y2="200"/>
+  <line class="arr" x1="194" y1="248" x2="246" y2="210"/>
+  <line class="arr" x1="194" y1="282" x2="246" y2="220"/>
 
-  <line x1="498" y1="56" x2="498" y2="282" stroke="#cbd5e1" stroke-dasharray="4 4"/>
+  <line x1="498" y1="56" x2="498" y2="292" stroke="#cbd5e1" stroke-dasharray="4 4"/>
 
   <!-- prolinecmd container -->
-  <rect x="520" y="56" width="214" height="190" rx="8" fill="#ffffff" stroke="#475569"/>
-  <text x="627" y="78" text-anchor="middle" font-size="13" fill="#0f172a">prolinecmd</text>
-  <text x="627" y="94" text-anchor="middle" font-size="10" fill="#475569">factory provisioning (reservearea)</text>
-
-  <rect x="534" y="106" width="186" height="24" rx="6" fill="#fef3c7" stroke="#b45309"/>
-  <text x="627" y="122" text-anchor="middle" font-size="11" fill="#0f172a">xponsn / xponpwd</text>
-  <rect x="534" y="136" width="186" height="24" rx="6" fill="#fef3c7" stroke="#b45309"/>
-  <text x="627" y="152" text-anchor="middle" font-size="11" fill="#0f172a">GponRegId — registration ID</text>
-  <rect x="534" y="166" width="186" height="24" rx="6" fill="#fef3c7" stroke="#b45309"/>
-  <text x="627" y="182" text-anchor="middle" font-size="11" fill="#0f172a">mt7570bob — BOB cal read/write</text>
-  <rect x="534" y="196" width="186" height="24" rx="6" fill="#fef3c7" stroke="#b45309"/>
-  <text x="627" y="212" text-anchor="middle" font-size="11" fill="#0f172a">web credentials</text>
+  <rect x="514" y="56" width="224" height="196" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+  <text class="lbl" x="629" y="80">prolinecmd</text>
+  <text class="sub" x="626" y="97">provisioning · reservearea</text>
+  <rect x="514" y="108" width="200" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text class="sub" x="629" y="126" font-weight="bold">xponsn / xponpwd</text>
+  <rect x="514" y="142" width="200" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text class="sub" x="629" y="160" font-weight="bold">GponRegId — reg ID</text>
+  <rect x="514" y="176" width="200" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text class="sub" x="629" y="194" font-weight="bold">mt7570bob — BOB cal</text>
+  <rect x="534" y="210" width="190" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/>
+  <text class="sub" x="629" y="228" font-weight="bold">web credentials</text>
 
   <!-- Smaller tools -->
-  <rect x="30" y="302" width="220" height="64" rx="8" fill="#fef3c7" stroke="#b45309"/>
-  <text x="140" y="324" text-anchor="middle" font-size="13" fill="#0f172a">zyledctl</text>
-  <text x="140" y="342" text-anchor="middle" font-size="10.5" fill="#475569">15 panel LEDs</text>
-  <text x="140" y="358" text-anchor="middle" font-size="10.5" fill="#475569">via /proc/tc3162/led_*</text>
+  <rect x="30" y="310" width="220" height="70" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <text class="lbl" x="140" y="334">zyledctl</text>
+  <text class="sub" x="140" y="352">15 panel LEDs</text>
+  <text class="sub" x="140" y="369">via /proc/tc3162/led_*</text>
 
-  <rect x="270" y="302" width="220" height="64" rx="8" fill="#fef3c7" stroke="#b45309"/>
-  <text x="380" y="324" text-anchor="middle" font-size="13" fill="#0f172a">zysh</text>
-  <text x="380" y="342" text-anchor="middle" font-size="10.5" fill="#475569">vendor shell</text>
-  <text x="380" y="358" text-anchor="middle" font-size="10.5" fill="#475569">TR-069 privileged ops</text>
+  <rect x="270" y="310" width="220" height="70" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <text class="lbl" x="380" y="334">zysh</text>
+  <text class="sub" x="380" y="352">vendor shell</text>
+  <text class="sub" x="380" y="369">TR-069 privileged ops</text>
 
-  <rect x="510" y="302" width="220" height="64" rx="8" fill="#fef3c7" stroke="#b45309"/>
-  <text x="620" y="324" text-anchor="middle" font-size="13" fill="#0f172a">zywifid</text>
-  <text x="620" y="342" text-anchor="middle" font-size="10.5" fill="#475569">wifi configuration daemon</text>
-  <text x="620" y="358" text-anchor="middle" font-size="10.5" fill="#475569">MT7916 runtime state</text>
+  <rect x="510" y="310" width="220" height="70" rx="8" fill="#fef3c7" stroke="#b45309" stroke-width="1.5"/>
+  <text class="lbl" x="620" y="334">zywifid</text>
+  <text class="sub" x="620" y="352">wifi configuration daemon</text>
+  <text class="sub" x="620" y="369">MT7916 runtime state</text>
 </svg>

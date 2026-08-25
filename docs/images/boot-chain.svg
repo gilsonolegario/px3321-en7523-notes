@@ -1,57 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="ui-sans-serif,system-ui,sans-serif">
-  <rect x="0.5" y="0.5" width="759" height="299" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 340" font-family="ui-sans-serif,system-ui,sans-serif">
+  <rect x="0.5" y="0.5" width="759" height="339" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
   <defs>
     <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 z" fill="#334155"/>
     </marker>
   </defs>
   <style>
-    .box{fill:#f1f5f9;stroke:#475569;stroke-width:1.5;rx:6}
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
+    .box{fill:#f1f5f9;stroke:#475569;stroke-width:1.5}
     .vendor{fill:#fef3c7;stroke:#b45309}
     .main{fill:#dbeafe;stroke:#1d4ed8}
-    .lbl{font-size:13px;fill:#0f172a;text-anchor:middle}
-    .sub{font-size:10px;fill:#475569;text-anchor:middle}
+    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
+    .sub{font-size:12px;fill:#334155;text-anchor:middle}
+    .cond{font-size:12px;fill:#92400e;font-style:italic;text-anchor:middle}
     .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
-    .cond{font-size:11px;fill:#b45309;font-style:italic}
   </style>
 
-  <rect class="box vendor" x="20" y="40" width="120" height="52"/>
-  <text class="lbl" x="80" y="62">BootROM</text>
-  <text class="sub" x="80" y="78">EN7523</text>
+  <text class="title" x="380" y="28">Boot chain</text>
 
-  <rect class="box vendor" x="180" y="40" width="120" height="52"/>
-  <text class="lbl" x="240" y="62">ATF</text>
-  <text class="sub" x="240" y="78">DRAM init · PSCI</text>
+  <!-- vendor chain -->
+  <rect class="box vendor" x="20" y="48" width="130" height="52"/>
+  <text class="lbl" x="85" y="71">BootROM</text>
+  <text class="sub" x="85" y="90">EN7523</text>
 
-  <rect class="box vendor" x="340" y="40" width="140" height="52"/>
-  <text class="lbl" x="410" y="56">zloader / tcboot</text>
-  <text class="sub" x="410" y="72">U-Boot 2014.04 + ZHAL</text>
-  <text class="sub" x="410" y="85">reads bootflag @RA+0x200000</text>
+  <rect class="box vendor" x="190" y="48" width="150" height="52"/>
+  <text class="lbl" x="265" y="71">ATF</text>
+  <text class="sub" x="265" y="90">DRAM init · PSCI</text>
 
-  <rect class="box" x="540" y="15" width="90" height="44"/>
-  <text class="lbl" x="585" y="34">flag = '0'</text>
-  <text class="sub" x="585" y="50">primary</text>
+  <rect class="box vendor" x="380" y="40" width="180" height="68"/>
+  <text class="lbl" x="470" y="60">zloader / tcboot</text>
+  <text class="sub" x="470" y="78">U-Boot 2014.04 + ZHAL</text>
+  <text class="sub" x="470" y="96">bootflag @RA+0x200000</text>
 
-  <rect class="box main" x="650" y="15" width="90" height="44"/>
-  <text class="lbl" x="695" y="34">flag = '1'</text>
-  <text class="sub" x="695" y="50">slave ← OpenWrt</text>
+  <!-- bootflag outcomes -->
+  <rect class="box" x="600" y="30" width="145" height="46"/>
+  <text class="lbl" x="672" y="50">flag = '0'</text>
+  <text class="sub" x="672" y="68">primary</text>
 
-  <rect class="box main" x="240" y="150" width="280" height="60"/>
-  <text class="lbl" x="380" y="172">HDR2 header + ECONET FIT</text>
-  <text class="sub" x="380" y="190">kernel@1 lzma · fdt@1 · filesystem@1 squashfs</text>
-  <text class="sub" x="380" y="204">load/entry 0x80208000 · CRC32buf + headerChksum</text>
+  <rect class="box main" x="600" y="100" width="145" height="46"/>
+  <text class="lbl" x="672" y="120">flag = '1'</text>
+  <text class="sub" x="672" y="138">slave ← OpenWrt</text>
 
-  <rect class="box main" x="240" y="240" width="280" height="44"/>
-  <text class="lbl" x="380" y="262">Linux 6.x — mainline</text>
-  <text class="sub" x="380" y="278">root=/dev/mtdblock6 injected by bootloader</text>
+  <!-- image layout -->
+  <rect class="box main" x="205" y="180" width="350" height="64"/>
+  <text class="lbl" x="380" y="202">HDR2 header + ECONET FIT</text>
+  <text class="sub" x="380" y="221">kernel@1 lzma · fdt@1 · filesystem@1 squashfs</text>
+  <text class="sub" x="380" y="237">load/entry 0x80208000 · CRC32buf + headerChksum</text>
 
-  <line class="arr" x1="140" y1="66" x2="176" y2="66"/>
-  <line class="arr" x1="300" y1="66" x2="336" y2="66"/>
-  <line class="arr" x1="480" y1="55" x2="536" y2="45"/>
-  <line class="arr" x1="630" y1="37" x2="646" y2="37"/>
-  <path class="arr" d="M 585 59 C 585 110, 450 130, 400 146"/>
-  <path class="arr" d="M 695 59 C 695 110, 420 135, 392 146"/>
-  <line class="arr" x1="380" y1="210" x2="380" y2="236"/>
+  <!-- kernel -->
+  <rect class="box main" x="220" y="272" width="320" height="50"/>
+  <text class="lbl" x="380" y="293">Linux 6.x — mainline</text>
+  <text class="sub" x="380" y="312">root=/dev/mtdblock6 injected by bootloader</text>
 
-  <text class="cond" x="500" y="128">bootflag==1 --&gt; booting from second image</text>
+  <!-- edges -->
+  <line class="arr" x1="150" y1="74" x2="186" y2="74"/>
+  <line class="arr" x1="340" y1="74" x2="376" y2="74"/>
+  <line class="arr" x1="560" y1="53" x2="596" y2="53"/>
+  <line class="arr" x1="560" y1="95" x2="596" y2="118"/>
+  <path class="arr" d="M 650 76 C 650 135, 520 160, 425 177"/>
+  <path class="arr" d="M 694 146 C 694 180, 560 172, 445 179"/>
+  <line class="arr" x1="380" y1="244" x2="380" y2="268"/>
+
+  <text class="cond" x="280" y="142">bootflag == 1 ⇒ boots second image</text>
 </svg>

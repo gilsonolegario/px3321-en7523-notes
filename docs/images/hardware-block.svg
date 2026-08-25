@@ -1,68 +1,75 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 420" font-family="ui-sans-serif,system-ui,sans-serif">
-  <rect x="0.5" y="0.5" width="759" height="419" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 450" font-family="ui-sans-serif,system-ui,sans-serif">
+  <rect x="0.5" y="0.5" width="759" height="449" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
   <defs>
     <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#334155"/></marker>
   </defs>
+  <style>
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
+    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
+    .sub{font-size:12px;fill:#334155;text-anchor:middle}
+    .ann{font-size:12px;fill:#92400e;font-style:italic;text-anchor:middle}
+    .bus{font-size:12px;fill:#334155;font-weight:bold;text-anchor:middle}
+    .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
+  </style>
 
-  <text x="380" y="26" text-anchor="middle" font-size="13" fill="#0f172a">PX3321-T1 hardware block diagram</text>
+  <text class="title" x="380" y="28">PX3321-T1 hardware block diagram</text>
 
   <!-- DDR3 -->
-  <rect x="24" y="128" width="212" height="74" rx="8" fill="#ffffff" stroke="#475569"/>
-  <text x="130" y="150" text-anchor="middle" font-size="13" fill="#0f172a">DDR3-1866 · 512 MiB</text>
-  <text x="130" y="168" text-anchor="middle" font-size="10.5" fill="#475569">~456 MiB usable</text>
-  <text x="130" y="184" text-anchor="middle" font-size="10.5" fill="#475569">after ATF/NPU/QDMA reservations</text>
-  <text x="130" y="222" text-anchor="middle" font-size="10.5" fill="#b45309" font-style="italic">ATF: 256 KiB reserved @ 0x80000000</text>
+  <rect x="20" y="140" width="220" height="76" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+  <text class="lbl" x="130" y="164">DDR3-1866 · 512 MiB</text>
+  <text class="sub" x="130" y="184">~456 MiB usable after</text>
+  <text class="sub" x="130" y="201">ATF/NPU/QDMA reservations</text>
+  <text class="ann" x="130" y="240">ATF reserves 256 KiB @0x80000000</text>
 
-  <line x1="240" y1="165" x2="274" y2="165" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
+  <line class="arr" x1="244" y1="178" x2="276" y2="178"/>
 
   <!-- SoC -->
-  <rect x="280" y="86" width="200" height="194" rx="10" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
-  <text x="380" y="108" text-anchor="middle" font-size="13" fill="#0f172a">Airoha EN7523</text>
-  <rect x="296" y="120" width="168" height="44" rx="6" fill="#ffffff" stroke="#1d4ed8"/>
-  <text x="380" y="138" text-anchor="middle" font-size="13" fill="#0f172a">2× Cortex-A53 @ 1 GHz</text>
-  <text x="380" y="155" text-anchor="middle" font-size="10" fill="#475569">ARMv7 (32-bit mode)</text>
-  <rect x="296" y="172" width="168" height="30" rx="6" fill="#ffffff" stroke="#1d4ed8"/>
-  <text x="380" y="191" text-anchor="middle" font-size="12.5" fill="#0f172a">EIP93 crypto engine</text>
-  <rect x="296" y="210" width="168" height="30" rx="6" fill="#ffffff" stroke="#1d4ed8"/>
-  <text x="380" y="229" text-anchor="middle" font-size="12.5" fill="#0f172a">Ethernet MAC</text>
+  <rect x="282" y="96" width="196" height="200" rx="10" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text class="lbl" x="380" y="118">Airoha EN7523</text>
+  <rect x="290" y="130" width="180" height="48" rx="6" fill="#ffffff" stroke="#1d4ed8"/>
+  <text class="lbl" x="380" y="150">2× Cortex-A53 @ 1 GHz</text>
+  <text class="sub" x="380" y="169">ARMv7 (32-bit mode)</text>
+  <rect x="290" y="186" width="180" height="34" rx="6" fill="#ffffff" stroke="#1d4ed8"/>
+  <text class="sub" x="380" y="208" font-weight="bold">EIP93 crypto engine</text>
+  <rect x="290" y="228" width="180" height="34" rx="6" fill="#ffffff" stroke="#1d4ed8"/>
+  <text class="sub" x="380" y="250" font-weight="bold">Ethernet MAC</text>
 
   <!-- Right: switch + LAN -->
-  <line x1="484" y1="126" x2="518" y2="126" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <rect x="524" y="104" width="208" height="44" rx="8" fill="#ffffff" stroke="#475569"/>
-  <text x="628" y="131" text-anchor="middle" font-size="13" fill="#0f172a">MT7530 DSA switch</text>
-  <line x1="628" y1="148" x2="628" y2="170" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <rect x="548" y="176" width="160" height="36" rx="8" fill="#dcfce7" stroke="#166534"/>
-  <text x="628" y="199" text-anchor="middle" font-size="12.5" fill="#14532d">4× GbE LAN</text>
+  <line class="arr" x1="482" y1="136" x2="516" y2="136"/>
+  <rect x="522" y="114" width="218" height="46" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+  <text class="lbl" x="631" y="142">MT7530 DSA switch</text>
+  <line class="arr" x1="631" y1="160" x2="631" y2="180"/>
+  <rect x="551" y="186" width="160" height="38" rx="8" fill="#dcfce7" stroke="#166534" stroke-width="1.5"/>
+  <text class="lbl" x="631" y="210" fill="#14532d">4× GbE LAN</text>
 
   <!-- Right: Wi-Fi over PCIe -->
-  <line x1="484" y1="266" x2="518" y2="266" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <text x="502" y="256" text-anchor="middle" font-size="10" fill="#475569">PCIe</text>
-  <rect x="524" y="232" width="208" height="68" rx="8" fill="#ffffff" stroke="#475569"/>
-  <text x="628" y="254" text-anchor="middle" font-size="13" fill="#0f172a">MT7916 DBDC Wi-Fi 6</text>
-  <text x="628" y="272" text-anchor="middle" font-size="10.5" fill="#475569">2.4 GHz 2×2 (phy0)</text>
-  <text x="628" y="288" text-anchor="middle" font-size="10.5" fill="#475569">5 GHz 3×3 (phy1)</text>
+  <line class="arr" x1="482" y1="266" x2="516" y2="266"/>
+  <text class="bus" x="499" y="258" font-size="12">PCIe</text>
+  <rect x="522" y="234" width="218" height="66" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+  <text class="lbl" x="631" y="256">MT7916 DBDC Wi-Fi 6</text>
+  <text class="sub" x="631" y="274">2.4 GHz 2×2 (phy0)</text>
+  <text class="sub" x="631" y="291">5 GHz 3×3 (phy1)</text>
 
   <!-- Bottom buses -->
-  <path d="M320,280 L320,308 L140,308 L140,326" fill="none" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <text x="230" y="302" text-anchor="middle" font-size="10" fill="#475569">i2c0</text>
-  <line x1="380" y1="280" x2="380" y2="326" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <text x="396" y="306" text-anchor="start" font-size="10" fill="#475569">SPI-NAND / SNFI</text>
-  <path d="M440,280 L440,308 L620,308 L620,326" fill="none" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
-  <text x="530" y="302" text-anchor="middle" font-size="10" fill="#475569">UART1</text>
+  <path class="arr" d="M320,296 L320,322 L145,322 L145,348"/>
+  <text class="bus" x="232" y="318">i2c0</text>
+  <line class="arr" x1="380" y1="296" x2="380" y2="348"/>
+  <text class="bus" x="396" y="320" text-anchor="start">SPI-NAND / SNFI</text>
+  <path class="arr" d="M440,296 L440,322 L618,322 L618,348"/>
+  <text class="bus" x="530" y="318">UART1</text>
 
   <!-- Bottom row -->
-  <rect x="40" y="332" width="200" height="64" rx="8" fill="#ffffff" stroke="#475569"/>
-  <text x="140" y="352" text-anchor="middle" font-size="13" fill="#0f172a">EN7571 LDDLA/BOSA</text>
-  <text x="140" y="370" text-anchor="middle" font-size="10.5" fill="#475569">GPON optical front-end</text>
-  <text x="140" y="386" text-anchor="middle" font-size="10.5" fill="#475569">i2c address 0x70</text>
+  <rect x="40" y="354" width="210" height="68" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+  <text class="lbl" x="145" y="376">EN7571 LDDLA/BOSA</text>
+  <text class="sub" x="145" y="395">GPON optical front-end</text>
+  <text class="sub" x="145" y="412">i2c address 0x70</text>
 
-  <rect x="280" y="332" width="200" height="64" rx="8" fill="#ffffff" stroke="#475569"/>
-  <text x="380" y="352" text-anchor="middle" font-size="13" fill="#0f172a">Micron SPI-NAND</text>
-  <text x="380" y="370" text-anchor="middle" font-size="10.5" fill="#475569">256 MiB</text>
-  <text x="380" y="386" text-anchor="middle" font-size="10.5" fill="#475569">128 KiB blocks</text>
+  <rect x="275" y="354" width="210" height="68" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+  <text class="lbl" x="380" y="376">Micron SPI-NAND</text>
+  <text class="sub" x="380" y="395">256 MiB · 128 KiB blocks</text>
 
-  <rect x="520" y="332" width="200" height="64" rx="8" fill="#ffffff" stroke="#475569"/>
-  <text x="620" y="352" text-anchor="middle" font-size="13" fill="#0f172a">J1 header (UART1)</text>
-  <text x="620" y="370" text-anchor="middle" font-size="10.5" fill="#475569">115200 8N1 · 3.3 V</text>
-  <text x="620" y="386" text-anchor="middle" font-size="10.5" fill="#475569">@ 0x1FBF0000</text>
+  <rect x="510" y="354" width="210" height="68" rx="8" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
+  <text class="lbl" x="615" y="376">J1 header (UART1)</text>
+  <text class="sub" x="615" y="395">115200 8N1 · 3.3 V</text>
+  <text class="sub" x="615" y="412">@ 0x1FBF0000</text>
 </svg>

@@ -1,45 +1,53 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 210" font-family="ui-sans-serif,system-ui,sans-serif">
-  <rect x="0.5" y="0.5" width="759" height="209" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 310" font-family="ui-sans-serif,system-ui,sans-serif">
+  <rect x="0.5" y="0.5" width="759" height="309" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
   <style>
-    .p{stroke:#0f172a;stroke-width:1;fill-opacity:1}
-    .t{font-size:11px;text-anchor:middle}
-    .s{font-size:9px;fill:#334155}
-    .hot{fill:#fecaca}
-    .note{font-size:10px;fill:#b45309}
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
+    .cell{stroke:#475569;stroke-width:1}
+    .in{font-size:14px;fill:#0f172a;text-anchor:middle}
+    .ext{font-size:13px;fill:#334155;text-anchor:middle;font-weight:bold}
+    .ann{font-size:12px;fill:#334155}
+    .tick{stroke:#334155;stroke-width:1}
   </style>
 
-  <rect class="p" x="20" y="30" width="30" height="40" fill="#e2e8f0"/>
-  <text class="t" x="35" y="55">ub</text>
-  <rect class="p" x="50" y="30" width="15" height="40" fill="#e2e8f0"/>
-  <text class="t" x="57" y="55">rf</text>
-  <rect class="p" x="65" y="30" width="22" height="40" fill="#e2e8f0"/>
-  <text class="t" x="76" y="55">k</text>
-  <rect class="p" x="87" y="30" width="150" height="40" fill="#e2e8f0"/>
-  <text class="t" x="162" y="55">rootfs</text>
-  <rect class="p" x="237" y="30" width="230" height="40" fill="#e2e8f0"/>
-  <text class="t" x="352" y="55">tclinux (primary)</text>
-  <rect class="p" x="467" y="30" width="24" height="40" fill="#e2e8f0"/>
-  <text class="t" x="479" y="55">ks</text>
-  <rect class="p" x="491" y="30" width="26" height="40" fill="#e2e8f0"/>
-  <text class="t" x="504" y="55">rs</text>
-  <rect class="p" x="517" y="30" width="230" height="40" fill="#dbeafe"/>
-  <text class="t" x="632" y="55">tclinux_slave</text>
+  <text class="title" x="380" y="28">Flash partition map</text>
 
-  <line x1="20" y1="70" x2="740" y2="70" stroke="#94a3b8"/>
+  <!-- Row 1 -->
+  <rect class="cell" x="20"  y="60" width="50"  height="60" fill="#e2e8f0"/>
+  <rect class="cell" x="70"  y="60" width="34"  height="60" fill="#e2e8f0"/>
+  <rect class="cell" x="104" y="60" width="30"  height="60" fill="#e2e8f0"/>
+  <rect class="cell" x="134" y="60" width="130" height="60" fill="#e2e8f0"/>
+  <rect class="cell" x="264" y="60" width="210" height="60" fill="#e2e8f0"/>
+  <rect class="cell" x="474" y="60" width="30"  height="60" fill="#e2e8f0"/>
+  <rect class="cell" x="504" y="60" width="30"  height="60" fill="#e2e8f0"/>
+  <rect class="cell" x="534" y="60" width="206" height="60" fill="#dbeafe"/>
+  <text class="in" x="45"  y="95">ub</text>
+  <text class="in" x="87"  y="95">rf</text>
+  <text class="in" x="119" y="95">k</text>
+  <text class="in" x="199" y="95">rootfs</text>
+  <text class="in" x="369" y="95">tclinux (primary)</text>
+  <text class="in" x="489" y="95">ks</text>
+  <text class="in" x="519" y="95">rs</text>
+  <text class="in" x="637" y="95">tclinux_slave</text>
 
-  <rect class="p hot" x="20" y="90" width="16" height="40" fill="#fee2e2"/>
-  <text class="t" x="28" y="115">wwan</text>
-  <rect class="p" x="36" y="90" width="32" height="40" fill="#e2e8f0"/>
-  <text class="t" x="52" y="115">data</text>
-  <rect class="p hot" x="68" y="90" width="16" height="40" fill="#dcfce7"/>
-  <text class="t" x="76" y="115">romd</text>
-  <rect class="p" x="84" y="90" width="420" height="40" fill="#e2e8f0"/>
-  <text class="t" x="294" y="115">misc (bad-block pool)</text>
-  <rect class="p" x="504" y="90" width="18" height="40" fill="#fef3c7"/>
-  <text class="t" x="513" y="115">RA</text>
+  <line x1="20" y1="138" x2="740" y2="138" stroke="#cbd5e1" stroke-width="1"/>
 
-  <text class="s" x="20" y="150">wwan — present but never populated on this SKU (all FF)</text>
-  <text class="note" x="20" y="166">rom-d — vendor writes proline backup here during boot on stock</text>
-  <text class="s" x="20" y="182">reservearea (RA) — 4KB EEPROM @0x4C000 · BOB laser table @0x140000 · bootflag byte @0x200000</text>
-  <text class="s" x="20" y="198">OpenWrt DTS splits tclinux_slave into kernel_slave / rootfs_slave / rootfs_data for mainline use</text>
+  <!-- Row 2 -->
+  <rect class="cell" x="20"  y="156" width="23"  height="50" fill="#fee2e2"/>
+  <rect class="cell" x="43"  y="156" width="46"  height="50" fill="#e2e8f0"/>
+  <rect class="cell" x="89"  y="156" width="23"  height="50" fill="#dcfce7"/>
+  <rect class="cell" x="112" y="156" width="602" height="50" fill="#e2e8f0"/>
+  <rect class="cell" x="714" y="156" width="26"  height="50" fill="#fef3c7"/>
+  <text class="in" x="413" y="186">misc (bad-block pool)</text>
+  <text class="ext" x="66"  y="186" font-size="13">data</text>
+  <line class="tick" x1="31"  y1="206" x2="31"  y2="214"/>
+  <line class="tick" x1="100" y1="206" x2="100" y2="214"/>
+  <line class="tick" x1="727" y1="206" x2="727" y2="214"/>
+  <text class="ext" x="31"  y="230">wwan</text>
+  <text class="ext" x="100" y="230">romd</text>
+  <text class="ext" x="727" y="230">RA</text>
+
+  <!-- Annotations tied to rows -->
+  <text class="ann" x="20" y="254">wwan present but never populated (all FF) · rom-d: vendor writes proline backup here on stock</text>
+  <text class="ann" x="20" y="274">RA: 4KB EEPROM @0x4C000 · BOB laser table @0x140000 · bootflag byte @0x200000</text>
+  <text class="ann" x="20" y="294">OpenWrt DTS splits tclinux_slave into kernel_slave / rootfs_slave / rootfs_data</text>
 </svg>

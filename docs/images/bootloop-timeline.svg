@@ -1,85 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="ui-sans-serif,system-ui,sans-serif">
-  <rect x="0.5" y="0.5" width="759" height="299" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 330" font-family="ui-sans-serif,system-ui,sans-serif">
+  <rect x="0.5" y="0.5" width="759" height="329" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
   <defs>
     <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 z" fill="#334155"/>
     </marker>
-  </defs>
-  <style>
-    .box{fill:#ffffff;stroke:#475569;stroke-width:1.5;rx:6}
-    .main{fill:#dbeafe;stroke:#1d4ed8}
-    .crash{fill:#fecaca;stroke:#b91c1c}
-    .lbl{font-size:13px;fill:#0f172a;text-anchor:middle}
-    .sub{font-size:10px;fill:#475569;text-anchor:middle}
-    .t{font-size:11px;fill:#334155;font-weight:bold;text-anchor:middle}
-    .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
-    .loop{stroke:#b91c1c;stroke-width:1.5;fill:none;marker-end:url(#r);stroke-dasharray:5 3}
-    .ded{fill:#dcfce7;stroke:#166534;stroke-width:1.5;rx:6}
-    .dlbl{font-size:12px;fill:#166534;font-weight:bold;text-anchor:middle}
-    .dtx{font-size:11px;fill:#0f172a;text-anchor:middle}
-  </style>
-  <defs>
     <marker id="r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
       <path d="M0,0 L6,3 L0,6 z" fill="#b91c1c"/>
     </marker>
   </defs>
+  <style>
+    .title{font-size:18px;font-weight:bold;fill:#0f172a;text-anchor:middle}
+    .box{fill:#ffffff;stroke:#475569;stroke-width:1.5}
+    .main{fill:#dbeafe;stroke:#1d4ed8}
+    .crash{fill:#fecaca;stroke:#b91c1c}
+    .lbl{font-size:14px;fill:#0f172a;text-anchor:middle;font-weight:bold}
+    .sub{font-size:12px;fill:#334155;text-anchor:middle}
+    .t{font-size:12px;fill:#334155;font-weight:bold;text-anchor:middle}
+    .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
+    .loop{stroke:#b91c1c;stroke-width:1.5;fill:none;marker-end:url(#r);stroke-dasharray:5 3}
+    .ded{fill:#dcfce7;stroke:#166534;stroke-width:1.5}
+    .dlbl{font-size:14px;fill:#166534;font-weight:bold;text-anchor:middle}
+    .dtx{font-size:13px;fill:#334155;text-anchor:middle}
+  </style>
 
-  <text class="lbl" x="380" y="28">Anatomy of the bootloop — one cycle, ~43 s</text>
+  <text class="title" x="380" y="30">Anatomy of the bootloop — one cycle, ~43 s</text>
 
   <!-- axis -->
-  <line class="arr" x1="30" y1="120" x2="725" y2="120"/>
+  <line class="arr" x1="30" y1="128" x2="725" y2="128"/>
 
   <!-- events above/below the axis -->
   <g class="box main">
-    <rect x="20" y="55" width="110" height="40"/>
-    <text class="lbl" x="75" y="72">kernel start</text>
-    <text class="sub" x="75" y="88">t = 0 s</text>
+    <rect x="20" y="60" width="120" height="46"/>
+    <text class="lbl" x="80" y="79">kernel start</text>
+    <text class="sub" x="80" y="98">t = 0 s</text>
   </g>
-  <line class="arr" x1="75" y1="95" x2="75" y2="115"/>
+  <line class="arr" x1="80" y1="106" x2="80" y2="123"/>
 
   <g class="box main">
-    <rect x="150" y="140" width="130" height="50"/>
-    <text class="sub" x="215" y="154">root mounted</text>
-    <text class="lbl" x="215" y="170">squashfs ro</text>
-    <text class="sub" x="215" y="184">t = 6.5 s</text>
+    <rect x="150" y="152" width="140" height="62"/>
+    <text class="sub" x="220" y="170">root mounted</text>
+    <text class="lbl" x="220" y="189">squashfs ro</text>
+    <text class="sub" x="220" y="206">t = 6.5 s</text>
   </g>
-  <line class="arr" x1="215" y1="140" x2="215" y2="125"/>
+  <line class="arr" x1="220" y1="152" x2="220" y2="133"/>
 
   <g class="box main">
-    <rect x="300" y="55" width="120" height="40"/>
-    <text class="sub" x="360" y="72">init console alive</text>
-    <text class="lbl" x="360" y="88">userspace up</text>
+    <rect x="303" y="60" width="144" height="46"/>
+    <text class="sub" x="375" y="78">init console alive</text>
+    <text class="lbl" x="375" y="98">userspace up</text>
   </g>
-  <line class="arr" x1="360" y1="95" x2="360" y2="115"/>
-  <text class="t" x="360" y="50">11.4 s</text>
+  <line class="arr" x1="375" y1="106" x2="375" y2="123"/>
+  <text class="t" x="375" y="52">11.4 s</text>
 
   <g class="box main">
-    <rect x="440" y="140" width="130" height="50"/>
-    <text class="sub" x="505" y="154">kmodloader</text>
-    <text class="lbl" x="505" y="170">loading modules</text>
-    <text class="sub" x="505" y="184">t = 17 s</text>
+    <rect x="452" y="152" width="140" height="62"/>
+    <text class="sub" x="522" y="170">kmodloader</text>
+    <text class="lbl" x="522" y="189">loading modules</text>
+    <text class="sub" x="522" y="206">t = 17 s</text>
   </g>
-  <line class="arr" x1="505" y1="140" x2="505" y2="125"/>
-  <text class="t" x="505" y="212">42 s</text>
+  <line class="arr" x1="522" y1="152" x2="522" y2="133"/>
+  <text class="t" x="522" y="234">42 s</text>
 
   <g class="box crash">
-    <rect x="600" y="60" width="150" height="90"/>
-    <text class="lbl" x="675" y="80" fill="#b91c1c">KERNEL PANIC</text>
-    <text class="sub" x="675" y="100">cfg80211 NULL deref @0x1</text>
-    <text class="sub" x="675" y="115">nf_tables @0x83c</text>
-    <text class="sub" x="675" y="130">both in</text>
-    <text class="sub" x="675" y="145">register_netdevice_notifier</text>
+    <rect x="588" y="56" width="166" height="100"/>
+    <text class="lbl" x="671" y="78" fill="#b91c1c">KERNEL PANIC</text>
+    <text class="sub" x="671" y="97">cfg80211 NULL deref @0x1</text>
+    <text class="sub" x="671" y="113">nf_tables @0x83c</text>
+    <text class="sub" x="671" y="129">both in register_</text>
+    <text class="sub" x="671" y="145">netdevice_notifier</text>
   </g>
-  <line class="arr" x1="675" y1="155" x2="675" y2="115"/>
+  <line class="arr" x1="671" y1="156" x2="671" y2="133"/>
 
   <!-- loop arrow back to start -->
-  <path class="loop" d="M 700 135 C 720 240, 90 250, 62 100"/>
-  <text class="dtx" x="380" y="238" fill="#b91c1c" font-style="italic">reboots in 1 s — forever</text>
+  <!-- loop arrow back to start -->
+  <path class="loop" d="M 704 150 C 726 250, 90 262, 64 112"/>
+  <text class="dtx" x="380" y="248" fill="#b91c1c" font-style="italic">reboots in 1 s — forever</text>
 
   <!-- deduction box -->
   <g class="ded">
-    <rect x="20" y="255" width="720" height="50"/>
-    <text class="dlbl" x="380" y="270">Deduction</text>
-    <text class="dtx" x="380" y="284">same crash site + different offsets ⇒ ABI mismatch, not logic bugs · MODVERSIONS=n hides it · rule: config-touching commits ⇒ full rebuild</text>
+    <rect x="20" y="272" width="720" height="44"/>
+    <text class="dtx" x="380" y="290"><tspan font-weight="bold" fill="#166534">Deduction:</tspan> same crash site + offsets differ ⇒ ABI mismatch, not logic bugs · MODVERSIONS=n hides it</text>
+    <text class="dtx" x="380" y="308">rule: config-touching commits ⇒ full rebuild</text>
   </g>
 </svg>
