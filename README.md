@@ -6,7 +6,7 @@
 
 **Community documentation for running mainline Linux on an ISP-locked GPON ONT**
 
-[![Status](https://img.shields.io/badge/status-active%20development-brightgreen)](#-document-map)
+[![Status](https://img.shields.io/badge/status-active%20development-brightgreen)](#document-map)
 [![Platform](https://img.shields.io/badge/SoC-Airoha%20EN7523%20ARMv7-blue)](docs/hardware.md)
 [![OpenWrt](https://img.shields.io/badge/OpenWrt-airoha%2Fen7523-00A5E0?logo=openwrt&logoColor=white)](https://openwrt.org)
 [![Optical](https://img.shields.io/badge/GPON-EN7571%20LDDLA%2FBOSA-06b6d4)](docs/optical-bob.md)
@@ -16,34 +16,34 @@
 *Everything we learned while bringing mainline OpenWrt to this board — the parts that
 took the longest to figure out and that nobody had written down.*
 
-[📖 Document map](#-document-map) ·
-[⚡ TL;DR](#-tldr-highlights) ·
-[🧩 Boot chain](#-the-boot-chain-at-a-glance) ·
-[💡 Key discoveries](#-key-discoveries) ·
-[🔗 Related work](#-related-work)
+[Document map](#document-map) ·
+[TL;DR](#the-platform-at-a-glance) ·
+[Boot chain](#the-boot-chain-at-a-glance) ·
+[Key discoveries](#key-discoveries) ·
+[Related work](#related-work)
 
 </div>
 
 ---
 
-## 📚 Document map
+## Document map
 
-| | Document | Contents |
-|:-:|---|---|
-| 🔧 | [`hardware.md`](docs/hardware.md) | SoC, RAM, flash silicon, reserved memory, optical front-end, Wi-Fi |
-| 🖥️ | [`uart.md`](docs/uart.md) | Locating & using the serial console (J1 header), discovery method |
-| ⛓️ | [`boot-chain.md`](docs/boot-chain.md) | zloader → HDR2/FIT dual-image boot, bootflag mechanics |
-| 💾 | [`flash-map.md`](docs/flash-map.md) | Full 256 MB NAND partition map — vendor **and** OpenWrt layouts |
-| 🧰 | [`vendor-tools.md`](docs/vendor-tools.md) | `zycli`, `zyledctl`, `prolinecmd` — the hidden stock toolbox |
-| 💡 | [`optical-bob.md`](docs/optical-bob.md) | **The LDDLA BOB calibration table**: format, hiding place, how to enable DDMI on mainline |
-| 📶 | [`wifi-calibration.md`](docs/wifi-calibration.md) | MT7916 EEPROM conventions, the *"no precal"* case |
-| 🌐 | [`gpon-next-steps.md`](docs/gpon-next-steps.md) | GPON/xPON bring-up: OMCI, provisioning identity, reaching O5 |
-| 🔬 | [`bootloop-forensics.md`](docs/bootloop-forensics.md) | Autopsy of a real kernel-vs-kmods ABI mismatch |
-| 🚑 | [`recovery.md`](docs/recovery.md) | Serial failsafe, ZHAL + ATENv3, getting out of a brick |
+| Document | Contents |
+|---|---|
+| [`hardware.md`](docs/hardware.md) | SoC, RAM, flash silicon, reserved memory, optical front-end, Wi-Fi |
+| [`uart.md`](docs/uart.md) | Locating & using the serial console (J1 header), discovery method |
+| [`boot-chain.md`](docs/boot-chain.md) | zloader → HDR2/FIT dual-image boot, bootflag mechanics |
+| [`flash-map.md`](docs/flash-map.md) | Full 256 MB NAND partition map — vendor **and** OpenWrt layouts |
+| [`vendor-tools.md`](docs/vendor-tools.md) | `zycli`, `zyledctl`, `prolinecmd` — the hidden stock toolbox |
+| [`optical-bob.md`](docs/optical-bob.md) | **The LDDLA BOB calibration table**: format, hiding place, how to enable DDMI on mainline |
+| [`wifi-calibration.md`](docs/wifi-calibration.md) | MT7916 EEPROM conventions, the *"no precal"* case |
+| [`gpon-next-steps.md`](docs/gpon-next-steps.md) | GPON/xPON bring-up: OMCI, provisioning identity, reaching O5 |
+| [`bootloop-forensics.md`](docs/bootloop-forensics.md) | Autopsy of a real kernel-vs-kmods ABI mismatch |
+| [`recovery.md`](docs/recovery.md) | Serial failsafe, ZHAL + ATENv3, getting out of a brick |
 
 ---
 
-## ⚡ The platform at a glance
+## The platform at a glance
 
 | Component | Detail |
 |---|---|
@@ -60,7 +60,7 @@ took the longest to figure out and that nobody had written down.*
 > driven by its own EN7571 chip. Getting DDMI working on mainline is one of the
 > highlights of this repo → [`optical-bob.md`](docs/optical-bob.md).
 
-## 🧩 The boot chain at a glance
+## The boot chain at a glance
 
 ```mermaid
 flowchart LR
@@ -79,10 +79,10 @@ The bootloader also injects board data into the kernel command line — includin
 `ethaddr=`, `country_code`, GPIO maps and `root=/dev/mtdblock6`. Full breakdown in
 [`boot-chain.md`](docs/boot-chain.md).
 
-## 💡 Key discoveries
+## Key discoveries
 
 <details open>
-<summary><b>🔬 The BOB laser calibration table — hidden in <code>reservearea+0x140000</code></b></summary>
+<summary><b>The BOB laser calibration table — hidden in <code>reservearea+0x140000</code></b></summary>
 
 <br/>
 
@@ -96,13 +96,13 @@ structure in the reservearea partition, with a PON magic at `+0x94`
 en7571 0-0070: EN7571 initialised: GPON, rev 2, KT1, DDMI1
 ```
 
-⚠️ It contains **your unit's** laser bias settings — publish the *format*, never your blob.
+**Caution:** It contains **your unit's** laser bias settings — publish the *format*, never your blob.
 Complete field-by-field layout: [`optical-bob.md`](docs/optical-bob.md).
 
 </details>
 
 <details>
-<summary><b>📶 This SKU ships with NO WiFi precalibration data — and that's fine</b></summary>
+<summary><b>This SKU ships with NO WiFi precalibration data — and that's fine</b></summary>
 
 <br/>
 
@@ -116,7 +116,7 @@ Details: [`wifi-calibration.md`](docs/wifi-calibration.md).
 </details>
 
 <details>
-<summary><b>🔌 UART J1 pinout: GND · empty · TX · RX · VCC (115200 8N1, 3.3 V)</b></summary>
+<summary><b>UART J1 pinout: GND · empty · TX · RX · VCC (115200 8N1, 3.3 V)</b></summary>
 
 <br/>
 
@@ -129,7 +129,7 @@ Method and host-side recipes: [`uart.md`](docs/uart.md).
 </details>
 
 <details>
-<summary><b>🏷️ Factory MAC randomization bug — zloader passes <code>ethaddr=</code>, mainline ignores it</b></summary>
+<summary><b>Factory MAC randomization bug — zloader passes <code>ethaddr=</code>, mainline ignores it</b></summary>
 
 <br/>
 
@@ -143,7 +143,7 @@ and matters for OLT authorization → [`gpon-next-steps.md`](docs/gpon-next-step
 </details>
 
 <details>
-<summary><b>💾 Dual-image bootflag: one ASCII byte at <code>reservearea+0x200000</code></b></summary>
+<summary><b>Dual-image bootflag: one ASCII byte at <code>reservearea+0x200000</code></b></summary>
 
 <br/>
 
@@ -163,7 +163,7 @@ More: [`flash-map.md`](docs/flash-map.md), [`recovery.md`](docs/recovery.md).
 </details>
 
 <details>
-<summary><b>📦 HDR2/ECONET FIT container quirks (CRC32 without final XOR)</b></summary>
+<summary><b>HDR2/ECONET FIT container quirks (CRC32 without final XOR)</b></summary>
 
 <br/>
 
@@ -176,7 +176,7 @@ boundaries. Byte-level layout: [`boot-chain.md`](docs/boot-chain.md).
 </details>
 
 <details>
-<summary><b>🧰 The stock toolbox is deeper than it looks</b></summary>
+<summary><b>The stock toolbox is deeper than it looks</b></summary>
 
 <br/>
 
@@ -189,7 +189,7 @@ Full inventory: [`vendor-tools.md`](docs/vendor-tools.md).
 
 </details>
 
-## 🔬 Case study: a bootloop autopsy
+## Case study: a bootloop autopsy
 
 One of the most useful pages here documents a real failure: after flashing, the kernel
 booted fully, then panicked ~42 s in — two unrelated modules (`cfg80211`, `nf_tables`)
@@ -214,7 +214,7 @@ simply sit at shifted offsets.
 
 </details>
 
-## 🌐 Where this is going: GPON internet on mainline
+## Where this is going: GPON internet on mainline
 
 Drivers exist (`AIROHA_XPON`, optical front-end); the remaining milestone is the protocol
 stack. After physical activation, the **OLT provisions the ONT over OMCI** (ITU-T G.988).
@@ -227,7 +227,7 @@ provisioning-identity notes: [`gpon-next-steps.md`](docs/gpon-next-steps.md).
 > [`recovery.md`](docs/recovery.md) **before** your first write to NAND — and know all
 > three exits (failsafe, ZHAL, dual-image flag) before you need them.
 
-## 🔗 Related work
+## Related work
 
 | Project | Link |
 |---|---|
@@ -237,7 +237,7 @@ provisioning-identity notes: [`gpon-next-steps.md`](docs/gpon-next-steps.md).
 | GPON reverse-engineering hub | [hack-gpon.org](https://hack-gpon.org) |
 | OpenWrt PR: MT7621 EEPROM → NVMEM conversion ("no precal" case) | [PR #14412](https://github.com/openwrt/openwrt/pull/14412) |
 
-## 🤝 Contributing
+## Contributing
 
 Found something wrong? Have a sibling device (DX3301, EX3301-T0, EX5601-T0, PMG5617 —
 they share the OPAL layout)? **Open an issue or a PR.** Diagrams are hand-written SVG;
@@ -250,8 +250,8 @@ data (MACs, serials, calibration blobs), always publish formats — never values
 
 **Docs CC BY 4.0 · Code snippets MIT** — see [`LICENSE.md`](LICENSE.md)
 
-⬆️ [Back to top](#zyxel-px3321-t1--airoha-en7523-platform-notes)
+[Back to top](#zyxel-px3321-t1--airoha-en7523-platform-notes)
 
-*Made with 🔬, a CH340 adapter, and far too many hours staring at boot logs.*
+*Made with a CH340 adapter and far too many hours staring at boot logs.*
 
 </div>
