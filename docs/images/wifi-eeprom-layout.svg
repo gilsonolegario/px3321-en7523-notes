@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="ui-sans-serif,system-ui,sans-serif">
+  <rect x="0.5" y="0.5" width="759" height="299" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#334155"/></marker>
+  </defs>
+
+  <text x="380" y="28" text-anchor="middle" font-size="13" fill="#0f172a">RT30xxEEPROM.bin — 208 896 bytes (0x33000)</text>
+
+  <!-- Reference pointer from l1profile.dat -->
+  <rect x="40" y="52" width="270" height="44" rx="8" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="175" y="70" text-anchor="middle" font-size="11.5" fill="#0f172a">/usr/etc/Wireless/l1profile.dat</text>
+  <text x="175" y="86" text-anchor="middle" font-size="10.5" fill="#475569">INDEX0 · offset 0x0 · size 0x33000</text>
+  <line x1="175" y1="96" x2="175" y2="126" stroke="#334155" marker-end="url(#a)"/>
+
+  <!-- Bar: total width 680 => 40..720 ; scale 208896 B -> 680 px ; 4096 B -> ~13 px -->
+  <text x="40" y="180" font-size="11" fill="#475569">offset 0x0</text>
+  <rect x="40" y="158" width="13" height="46" fill="#dcfce7" stroke="#166534"/>
+  <rect x="53" y="158" width="667" height="46" fill="#e2e8f0" stroke="#475569"/>
+  <!-- tick at 4 KiB -->
+  <line x1="53" y1="150" x2="53" y2="212" stroke="#334155"/>
+  <text x="66" y="146" font-size="10" fill="#475569">4 KiB</text>
+
+  <!-- Segment labels -->
+  <text x="47" y="226" text-anchor="middle" font-size="9.5" fill="#166534">real</text>
+  <text x="47" y="238" text-anchor="middle" font-size="9.5" fill="#166534">data</text>
+  <text x="386" y="226" text-anchor="middle" font-size="11" fill="#334155">generic template padding — ~200 KiB reserved (all FF beyond template)</text>
+
+  <!-- Red callout -->
+  <rect x="60" y="252" width="640" height="36" rx="8" fill="#fecaca" stroke="#b91c1c"/>
+  <text x="380" y="268" text-anchor="middle" font-size="10.5" fill="#7f1d1d">mainline mt76 precal flag @ 0x19A reads 0 in every source: live flash · full-flash dump · vendor blob</text>
+  <text x="380" y="282" text-anchor="middle" font-size="10.5" fill="#7f1d1d">NO precal on this SKU (cf. OpenWrt PR #14412)</text>
+
+  <!-- MAC note -->
+  <text x="720" y="152" text-anchor="end" font-size="10" fill="#475569">Wi-Fi MAC derives from bytes near offset 5–10</text>
+</svg>

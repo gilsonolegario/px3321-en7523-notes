@@ -2,6 +2,8 @@
 
 [← Back to README](../README.md) · [GPON next steps →](gpon-next-steps.md)
 
+![RT30xxEEPROM.bin layout](images/wifi-eeprom-layout.svg)
+
 ## The file
 
 The stock firmware ships a single calibration container for the MT7916:

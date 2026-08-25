@@ -5,6 +5,8 @@
 Three independent ways back from a broken flash — learn all three before
 writing anything to NAND.
 
+![Recovery decision tree from a broken flash](images/recovery-tree.svg)
+
 ## 1. OpenWrt failsafe mode
 
 If the installed system reaches **preinit** (even if it panics later),

@@ -6,6 +6,8 @@ Bringing fiber connectivity up on mainline is the last big milestone.
 The drivers are present (`AIROHA_XPON`, optical front-end); what remains is
 the protocol stack and provisioning.
 
+![GPON activation states O1-O5 with mainline status](images/gpon-o-states.svg)
+
 ## What already works
 
 * XPON MAC block exposes rich state via `/proc/xpon/ponInfo`

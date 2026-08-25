@@ -14,6 +14,8 @@
 | Crypto | Inside-Secure EIP93 |
 | Boot ROM | EN7523 bootrom → ATF (256 KiB reserved at 0x80000000) |
 
+![Hardware block diagram — PX3321-T1](images/hardware-block.svg)
+
 ## Reserved memory map (kernel view)
 
 ```

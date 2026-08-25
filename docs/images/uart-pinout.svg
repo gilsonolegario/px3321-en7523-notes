@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 352" font-family="ui-sans-serif,system-ui,sans-serif">
+  <rect x="0.5" y="0.5" width="759" height="351" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#334155"/></marker>
+  </defs>
+
+  <text x="340" y="24" text-anchor="middle" font-size="13" fill="#0f172a">UART console — J1 header pinout and wiring</text>
+  <rect x="618" y="12" width="112" height="24" rx="12" fill="#dcfce7" stroke="#166534"/>
+  <text x="674" y="28" text-anchor="middle" font-size="11" fill="#14532d">115200 8N1</text>
+
+  <!-- Physical header strip -->
+  <rect x="48" y="44" width="392" height="78" rx="8" fill="#f1f5f9" stroke="#475569"/>
+  <text x="88"  y="54" text-anchor="middle" font-size="10" fill="#475569">1</text>
+  <text x="166" y="54" text-anchor="middle" font-size="10" fill="#475569">2</text>
+  <text x="244" y="54" text-anchor="middle" font-size="10" fill="#475569">3</text>
+  <text x="322" y="54" text-anchor="middle" font-size="10" fill="#475569">4</text>
+  <text x="400" y="54" text-anchor="middle" font-size="10" fill="#475569">5</text>
+
+  <rect x="62" y="58" width="52" height="46" rx="6" fill="#ffffff" stroke="#475569"/>
+  <text x="88" y="82" text-anchor="middle" font-size="12" fill="#0f172a">GND</text>
+  <text x="88" y="97" text-anchor="middle" font-size="9" fill="#475569">isolated</text>
+
+  <rect x="140" y="58" width="52" height="46" rx="6" fill="#fef3c7" stroke="#b45309" stroke-dasharray="4 3"/>
+  <text x="166" y="86" text-anchor="middle" font-size="10.5" fill="#b45309" font-style="italic">empty</text>
+
+  <rect x="218" y="58" width="52" height="46" rx="6" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="244" y="80" text-anchor="middle" font-size="12" fill="#0f172a">TX</text>
+  <text x="244" y="96" text-anchor="middle" font-size="9" fill="#475569">to host</text>
+
+  <rect x="296" y="58" width="52" height="46" rx="6" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="322" y="80" text-anchor="middle" font-size="12" fill="#0f172a">RX</text>
+  <text x="322" y="96" text-anchor="middle" font-size="9" fill="#475569">from host</text>
+
+  <rect x="374" y="58" width="52" height="46" rx="6" fill="#fecaca" stroke="#b91c1c"/>
+  <text x="400" y="82" text-anchor="middle" font-size="12" fill="#7f1d1d">VCC</text>
+  <text x="400" y="97" text-anchor="middle" font-size="9" fill="#7f1d1d">3.3 V</text>
+
+  <text x="88"  y="130" text-anchor="middle" font-size="10" fill="#475569">physically separated</text>
+  <text x="166" y="155" text-anchor="middle" font-size="10" fill="#b45309" font-style="italic">unpopulated slot</text>
+  <text x="400" y="140" text-anchor="middle" font-size="11" fill="#b91c1c">3.3 V ONLY — never 5 V</text>
+
+  <!-- Wiring crossover -->
+  <text x="140" y="198" text-anchor="middle" font-size="11" fill="#475569">PX3321 J1</text>
+
+  <rect x="96" y="206" width="88" height="22" rx="6" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="140" y="221" text-anchor="middle" font-size="12" fill="#0f172a">TX</text>
+  <rect x="96" y="234" width="88" height="22" rx="6" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="140" y="249" text-anchor="middle" font-size="12" fill="#0f172a">RX</text>
+  <rect x="96" y="262" width="88" height="22" rx="6" fill="#ffffff" stroke="#475569"/>
+  <text x="140" y="277" text-anchor="middle" font-size="12" fill="#0f172a">GND</text>
+
+  <rect x="470" y="160" width="264" height="130" rx="8" fill="#ffffff" stroke="#475569"/>
+  <text x="602" y="180" text-anchor="middle" font-size="12.5" fill="#0f172a">USB-serial adapter (CH340)</text>
+  <text x="602" y="195" text-anchor="middle" font-size="10" fill="#475569">shows up as /dev/ttyUSB*</text>
+
+  <rect x="482" y="206" width="54" height="22" rx="6" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="509" y="221" text-anchor="middle" font-size="12" fill="#0f172a">TX</text>
+  <rect x="482" y="234" width="54" height="22" rx="6" fill="#dbeafe" stroke="#1d4ed8"/>
+  <text x="509" y="249" text-anchor="middle" font-size="12" fill="#0f172a">RX</text>
+  <rect x="482" y="262" width="54" height="22" rx="6" fill="#ffffff" stroke="#475569"/>
+  <text x="509" y="277" text-anchor="middle" font-size="12" fill="#0f172a">GND</text>
+
+  <line x1="188" y1="218" x2="476" y2="246" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="476" y1="218" x2="188" y2="246" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
+  <line x1="188" y1="274" x2="476" y2="274" stroke="#334155" stroke-width="1.5" marker-end="url(#a)"/>
+
+  <text x="333" y="264" text-anchor="middle" font-size="10" fill="#475569" font-style="italic">cross TX/RX — a swap costs nothing but silence</text>
+
+  <text x="380" y="316" text-anchor="middle" font-size="11" fill="#475569">VCC is not needed for serial — the adapter is self-powered from USB</text>
+  <text x="380" y="334" text-anchor="middle" font-size="11" fill="#b91c1c">never feed 5 V into any of these pads</text>
+</svg>

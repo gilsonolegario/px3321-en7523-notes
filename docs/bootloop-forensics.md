@@ -6,6 +6,8 @@ After flashing a new image, the device entered a boot loop: full kernel
 boot, userspace starting, then a panic ~42 s in, forever. This page documents
 the diagnosis method — the pattern is more useful than the specifics.
 
+![Bootloop timeline: kernel start to panic and loop](images/bootloop-timeline.svg)
+
 ## Symptom
 
 ```text

@@ -5,6 +5,8 @@
 The stock firmware ships a set of small binaries that are far more useful
 than their names suggest. All live in `/bin` or `/usr/bin`.
 
+![Vendor tools map — zycli symlink fan-in, prolinecmd and helpers](images/vendor-tools-map.svg)
+
 ## zycli — the multi-tool
 
 `/bin/zycli` is a single 135 KB binary; many familiar commands are symlinks

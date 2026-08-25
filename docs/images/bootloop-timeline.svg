@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="ui-sans-serif,system-ui,sans-serif">
+  <rect x="0.5" y="0.5" width="759" height="299" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <style>
+    .box{fill:#ffffff;stroke:#475569;stroke-width:1.5;rx:6}
+    .main{fill:#dbeafe;stroke:#1d4ed8}
+    .crash{fill:#fecaca;stroke:#b91c1c}
+    .lbl{font-size:13px;fill:#0f172a;text-anchor:middle}
+    .sub{font-size:10px;fill:#475569;text-anchor:middle}
+    .t{font-size:11px;fill:#334155;font-weight:bold;text-anchor:middle}
+    .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
+    .loop{stroke:#b91c1c;stroke-width:1.5;fill:none;marker-end:url(#r);stroke-dasharray:5 3}
+    .ded{fill:#dcfce7;stroke:#166534;stroke-width:1.5;rx:6}
+    .dlbl{font-size:12px;fill:#166534;font-weight:bold;text-anchor:middle}
+    .dtx{font-size:11px;fill:#0f172a;text-anchor:middle}
+  </style>
+  <defs>
+    <marker id="r" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 z" fill="#b91c1c"/>
+    </marker>
+  </defs>
+
+  <text class="lbl" x="380" y="28">Anatomy of the bootloop — one cycle, ~43 s</text>
+
+  <!-- axis -->
+  <line class="arr" x1="30" y1="120" x2="725" y2="120"/>
+
+  <!-- events above/below the axis -->
+  <g class="box main">
+    <rect x="20" y="55" width="110" height="40"/>
+    <text class="lbl" x="75" y="72">kernel start</text>
+    <text class="sub" x="75" y="88">t = 0 s</text>
+  </g>
+  <line class="arr" x1="75" y1="95" x2="75" y2="115"/>
+
+  <g class="box main">
+    <rect x="150" y="140" width="130" height="50"/>
+    <text class="sub" x="215" y="154">root mounted</text>
+    <text class="lbl" x="215" y="170">squashfs ro</text>
+    <text class="sub" x="215" y="184">t = 6.5 s</text>
+  </g>
+  <line class="arr" x1="215" y1="140" x2="215" y2="125"/>
+
+  <g class="box main">
+    <rect x="300" y="55" width="120" height="40"/>
+    <text class="sub" x="360" y="72">init console alive</text>
+    <text class="lbl" x="360" y="88">userspace up</text>
+  </g>
+  <line class="arr" x1="360" y1="95" x2="360" y2="115"/>
+  <text class="t" x="360" y="50">11.4 s</text>
+
+  <g class="box main">
+    <rect x="440" y="140" width="130" height="50"/>
+    <text class="sub" x="505" y="154">kmodloader</text>
+    <text class="lbl" x="505" y="170">loading modules</text>
+    <text class="sub" x="505" y="184">t = 17 s</text>
+  </g>
+  <line class="arr" x1="505" y1="140" x2="505" y2="125"/>
+  <text class="t" x="505" y="212">42 s</text>
+
+  <g class="box crash">
+    <rect x="600" y="60" width="150" height="90"/>
+    <text class="lbl" x="675" y="80" fill="#b91c1c">KERNEL PANIC</text>
+    <text class="sub" x="675" y="100">cfg80211 NULL deref @0x1</text>
+    <text class="sub" x="675" y="115">nf_tables @0x83c</text>
+    <text class="sub" x="675" y="130">both in</text>
+    <text class="sub" x="675" y="145">register_netdevice_notifier</text>
+  </g>
+  <line class="arr" x1="675" y1="155" x2="675" y2="115"/>
+
+  <!-- loop arrow back to start -->
+  <path class="loop" d="M 700 135 C 720 240, 90 250, 62 100"/>
+  <text class="dtx" x="380" y="238" fill="#b91c1c" font-style="italic">reboots in 1 s — forever</text>
+
+  <!-- deduction box -->
+  <g class="ded">
+    <rect x="20" y="255" width="720" height="50"/>
+    <text class="dlbl" x="380" y="270">Deduction</text>
+    <text class="dtx" x="380" y="284">same crash site + different offsets ⇒ ABI mismatch, not logic bugs · MODVERSIONS=n hides it · rule: config-touching commits ⇒ full rebuild</text>
+  </g>
+</svg>

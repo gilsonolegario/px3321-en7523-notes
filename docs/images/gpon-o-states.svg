@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="ui-sans-serif,system-ui,sans-serif">
+  <rect x="0.5" y="0.5" width="759" height="299" rx="10" fill="#f8fafc" stroke="#cbd5e1"/>
+  <defs>
+    <marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 z" fill="#334155"/>
+    </marker>
+  </defs>
+  <style>
+    .box{stroke-width:1.5;rx:6}
+    .idle{fill:#f1f5f9;stroke:#475569}
+    .prog{fill:#fef3c7;stroke:#b45309}
+    .op{fill:#dcfce7;stroke:#166534}
+    .lbl{font-size:13px;fill:#0f172a;text-anchor:middle}
+    .sub{font-size:10px;fill:#475569;text-anchor:middle}
+    .arr{stroke:#334155;stroke-width:1.5;fill:none;marker-end:url(#a)}
+    .band{rx:5}
+    .ok{fill:#dbeafe;stroke:#1d4ed8}
+    .miss{fill:#fef3c7;stroke:#b45309}
+    .note{font-size:11px;fill:#b45309;font-style:italic;text-anchor:middle}
+    .bt{font-size:11px;fill:#0f172a;text-anchor:middle}
+  </style>
+
+  <text class="lbl" x="380" y="26">GPON activation states — ITU-T G.984.2</text>
+
+  <g class="box idle">
+    <rect x="20" y="60" width="130" height="56"/>
+    <text class="lbl" x="85" y="83">O1 Initial</text>
+    <text class="sub" x="85" y="100">no downstream sync</text>
+  </g>
+
+  <g class="box idle">
+    <rect x="170" y="60" width="130" height="56"/>
+    <text class="lbl" x="235" y="83">O2 Standby</text>
+    <text class="sub" x="235" y="100">waiting for serial</text>
+  </g>
+
+  <g class="box prog">
+    <rect x="320" y="60" width="140" height="56"/>
+    <text class="lbl" x="390" y="83">O3 Serial number</text>
+    <text class="sub" x="390" y="100">serial sent to OLT</text>
+  </g>
+
+  <g class="box prog">
+    <rect x="480" y="60" width="120" height="56"/>
+    <text class="lbl" x="540" y="83">O4 Ranging</text>
+    <text class="sub" x="540" y="100">PLOAM / OMCC</text>
+  </g>
+
+  <g class="box op">
+    <rect x="620" y="60" width="120" height="56"/>
+    <text class="lbl" x="680" y="83">O5 Operation</text>
+    <text class="sub" x="680" y="100">traffic flows</text>
+  </g>
+
+  <line class="arr" x1="150" y1="88" x2="166" y2="88"/>
+  <line class="arr" x1="300" y1="88" x2="316" y2="88"/>
+  <line class="arr" x1="460" y1="88" x2="476" y2="88"/>
+  <line class="arr" x1="600" y1="88" x2="616" y2="88"/>
+
+  <text class="note" x="380" y="142">identity mismatch ⇒ the OLT ignores you — inject stock serial / registration ID before testing on a live line</text>
+
+  <g class="band ok">
+    <rect x="20" y="165" width="720" height="44"/>
+    <text class="bt" x="380" y="183">working today on mainline</text>
+    <text class="sub" x="380" y="200">XPON MAC block up · ponInfo populated · DDMI alive</text>
+  </g>
+
+  <g class="band miss">
+    <rect x="20" y="225" width="720" height="44"/>
+    <text class="bt" x="380" y="243">missing</text>
+    <text class="sub" x="380" y="260">OMCI daemon provisioning (OLT pushes VLANs / T-CONTs / GEM ports)</text>
+  </g>
+</svg>

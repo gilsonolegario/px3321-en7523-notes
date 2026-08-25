@@ -6,6 +6,8 @@ The GPON optical transceiver is not a pluggable SFP — it is a **BOSA**
 (Bidirectional Optical Sub-Assembly) bonded to the main PCB and driven by a
 dedicated **EN7571** chip hanging off **i2c0 at address 0x70**.
 
+![BOB calibration table extraction and load flow](images/optical-bob-flow.svg)
+
 ## Identification evidence
 
 * Vendor kernel symbols: `en7571_*`, threads `LDDLA_task_wait`,

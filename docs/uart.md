@@ -5,6 +5,8 @@
 The serial console is **UART1** (`0x1FBF0000`, ns16550-compatible),
 **115200 8N1**, **3.3 V logic**.
 
+![J1 header pinout and CH340 adapter wiring](images/uart-pinout.svg)
+
 ## The header (J1)
 
 The PCB has an unpopulated factory header marked **J1**, 5 positions,
