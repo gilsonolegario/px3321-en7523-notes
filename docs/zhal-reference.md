@@ -101,10 +101,10 @@ Firmware Version       : V5.44(ACHK.0)C0
 Bootbase Version       : V2.5 | 05/22/2023 15:32:47
 Vendor Name            : Zyxel Communications Corp.
 Product Model          : PX3321-T1
-Serial Number          : S230Y41048290
-Gpon Serial Number     : ZYXE8CAFBD33
-First MAC Address      : 1433759A1FB0
-Last MAC Address       : 1433759A1FBF
+Serial Number          : XXXXXXXXXXXXX
+Gpon Serial Number     : XXXXXXXXXXXXXXXX
+First MAC Address      : XXXXXXXXXXXXXX
+Last MAC Address       : XXXXXXXXXXXXXX
 MAC Address Quantity   : 16
 Default Country Code   : D0
 Boot Module Debug Flag : 01

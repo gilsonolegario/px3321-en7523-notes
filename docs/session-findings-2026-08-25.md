@@ -151,8 +151,8 @@ snmp_sysobjid=1.2.3.4.5
 country_code=D0
 ether_gpio=0c
 power_gpio=1515
-username=telecomadmin
-password=root
+username=<redacted>
+password=<redacted>
 dsl_gpio=0a
 internet_gpio=01
 multi_upgrade_gpio=0b0a03010604051b1a00000000000000
@@ -198,6 +198,50 @@ tclinux_info=0x1cd1af7,0x2090,0x28f62f,0x2917b8,0x1a40004,0x8e0d3b,0x4b9c,0x3fba
 | LuCI | luci-app-optical (native view, commit `7c7ee92dec`) |
 | NPU | airoha_npu loaded, 333 MHz |
 | Flowtable | nftables `flags offload` on lan1-lan4 |
+
+---
+
+---
+
+## ZHAL Bootloader Discovery
+
+The PX3321-T1 bootloader is **not standard U-Boot** — it is Zyxel's proprietary
+**ZHAL** (Zyxel Hardware Abstraction Layer) shell, built on U-Boot 2014.04-rc1.
+
+### Accessing ZHAL
+
+1. Connect UART (115200 8N1)
+2. Reboot device
+3. Press **Enter** during 5-second autoboot window (~T+17s after reboot)
+4. `ZHAL>` prompt appears
+
+### Key Commands
+
+| Command | Purpose |
+|---|---|
+| `ATHE` | List all commands (replaces `help`) |
+| `ATSH` | Dump manufacturer data (model, serial, MACs, firmware) |
+| `ATCK` | Show/set passwords (admin, supervisor, PSK) |
+| `ATRF x,y,z` | Read flash → RAM (offset, length, RAM addr) |
+| `ATWF x,y,z` | Write RAM → flash |
+| `ATER x,y` | Erase flash region |
+| `ATDU x,y` | Dump memory contents |
+| `ATGO` | Boot the system |
+| `ATSW` | Swap boot image (dual-image toggle) |
+| `ATLD x,[y]` | Load file via TFTP |
+
+### Implications
+
+- `printenv`, `setenv`, `bdinfo` and all standard U-Boot commands do NOT exist
+- `ATGU` ("go to U-Boot") does NOT expose standard U-Boot commands
+- Flash read/write is via `ATRF`/`ATWF`/`ATER` — can dump and rewrite the zloader
+- The zloader binary is at SPI NAND offset `0x50000`, loaded to `0x81800000`
+- Dual-image boot is controlled by an ASCII flag byte in `reservearea + 0x200000`
+- Bootloader replacement requires understanding the ZHAL→ATF→zloader→Linux chain
+
+### Full Reference
+
+See [`zhal-reference.md`](zhal-reference.md) for complete command documentation.
 
 ---
 
