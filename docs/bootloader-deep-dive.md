@@ -169,10 +169,54 @@ and upstream U-Boot development.
 
 ## 3. Critical Quirks (from UART + community)
 
-### ATGU Requires 2 Keystrokes
-The first `ATGU` reboots the device back into ZHAL. The second `ATGU`
-drops into the real U-Boot CLI where `setenv`/`saveenv` work. This is
-because the ZHAL extension intercepts the first call and reinitializes.
+### `ATGU` Requires Two Passes
+ZHAL intercepts the **first** `ATGU`: it prints `zloader_on=0` and relaunches
+the zloader banner with a fresh countdown. Stop that countdown with Enter and
+issue `ATGU` **again** — the second call falls through to the real U-Boot
+autoboot window.
+
+Two nearly identical countdowns appear on serial, owned by different programs:
+
+| Countdown | Owner | Action |
+|---|---|---|
+| 5 s | zld-2.5 | press Enter → back to `ZHAL>` |
+| 3 s | U-Boot itself (`bootdelay=3`) | **hands off** — silence lets it expire → `ECNT>` |
+
+Touching the keyboard during the 3-second window aborts into the wrong path.
+Exit back to OpenWrt afterwards with `reset`.", "edit1 ATGU")
+
+# EDIT 2 — ECNT> em pratica + dumps de RAM (entra antes de ATBT)
+replace_once(### Inside the `ECNT>` Shell
+
+`bdinfo` ground truth from hardware:
+
+```text
+DRAM bank   = 0x80000000 (size 0x1F000000)
+relocation  = 0x9EE00000
+baudrate    = 115200
+```
+
+Beyond anything ZHAL offers, the shell exposes the full 2014.04-rc1 toolkit:
+`md`/`mw`/`cmp`/`crc32`/`mtest`, `printenv`/`setenv`/`saveenv`/`editenv`,
+`mtd`/`mtdparts`/`chpart`, `imginfo`/`iminfo`/`imxtract`, **`bootflag`
+read/swap**, `ping`/`tftpboot`, `loadb`/`loadx`/`loady`, `fdt`, `efuse`,
+`fip_test`, `go`/`goaddr`.
+
+### Reading the Running Loaders from RAM
+
+Sitting at `ZHAL>`, both loaders remain alive and decompressed in DRAM —
+dumping them there beats reading their LZMA-wrapped flash copies:
+
+```text
+ATDU 0x81700000,0x18000    # zld-2.5 decompressed (96 KB)
+ATDU 0x9EE00000,0x40000    # tcboot/U-Boot as-running, relocated (256 KB)
+```
+
+`strings` alone recovers the whole AT command table and help texts; capstone
+does the rest. The relocation address doubles as proof of where U-Boot
+executes from.
+
+### ATBT 1 Required Before Any Flash Write
 
 ### ATBT 1 Required Before Any Flash Write
 Without `ATBT 1` (block0 write enable), all write commands fail with
@@ -295,6 +339,34 @@ tclinux_info=0x1cd1af7,0x2090,...
 0x0E000000 └─────────────────────┘
 ```
 
+### Inside mtd0 — FIP certificates, zloader image, environment block
+
+Byte-level anatomy of the 512 KB `u-boot` partition (from ATRF/ATDU dumps):
+
+| Offset | Contents |
+|---|---|
+| `0x00000` | Preloader / BootROM header (NOP sled + vector) |
+| `0x10000` | tcboot code start (`42eeffea` ARM branch vector) |
+| `0x20000` | ASN.1 FIP certificates — *"SoC Firmware Content Certificate"* |
+| `0x30000` | Hash/key blobs |
+| `0x40000` | Fully erased |
+| `0x50000` | `zld-2.5` legacy uImage — LZMA standalone, 16 063 B payload, load `0x81700000`, entry `0x81700204` |
+| `0x70000` | **Environment block** (last 64 KB sector) |
+
+Runtime `printenv` at `ECNT>` matches the raw `0x70000..0x80000` dump
+variable-for-variable — this block *is* the live environment.
+
+The vendor SDK source explains the write path: `common/ecnt/env_flash.c`
+implements `saveenv()` with a CRC32-headed `env_t` written at
+`CONFIG_ENV_MTK_OFFSET`, which resolves dynamically through
+`ecnt_get_ubootenv_mtd_offset()` (`drivers/misc/ecnt/image/ecnt_mtd.c`) by
+looking up the partition named `MTK_UBOOT_ENV`. Notably, the block's current
+data starts mid-sector (`baudrate=` at `+0xC14A`) with no CRC prefix right
+before it — evidence that the present content was written by the Linux-side
+parser (`en7523_evb_mtk_env_parser.h`), not by U-Boot's `saveenv`. Treat
+`saveenv` as untested until exercised deliberately, with a fresh block backup
+in hand.
+
 ---
 
 ## 7. Vendor Tools (from GPL + docs)
@@ -373,25 +445,40 @@ ATDU 0x80000000,0x4000            # dump to serial (capture offline)
 ```
 Then: `strings -t x dump.bin | grep -iE 'trx|hdr0|tftp|bootcmd|setenv'`
 
-### Phase 2: Chain-load Test (no flash write)
-1. Build mainline U-Boot for EN7523
+### Phase 2: Chain-load Test (zero flash writes)
+1. Build a U-Boot for EN7523 — either from the vendor SDK tree
+   [`Yuzhii0718/bootloader-en75xx`](https://github.com/Yuzhii0718/bootloader-en75xx)
+   (the exact `tcboot` + u-boot-2014.04-rc1 sources behind this bootloader,
+   public) or from Mikhail Kshevetskiy's mainline series.
 2. Package as FIT image: `type="kernel", os="linux", compression="lzma"`,
-   load/entry=`0x81e00000`
-3. Load via TFTP: `ATLD tclinux.bin,0x81000000`
-4. Boot: `ATGO`
-5. If it works → U-Boot CLI is accessible
+   load/entry=`0x81e00000`.
+3. Load via TFTP — `ATLD tclinux.bin,0x81000000` then `ATGO` from ZHAL, or
+   `tftpboot` + `bootm` straight from the `ECNT>` shell.
+4. Success criterion: console, NAND (SNFI) and Ethernet all up from RAM.
 
-### Phase 3: Flash (irreversible)
-Only after Phase 2 succeeds:
-1. Dump full flash: `ATRF 0x0,0xE00000,0x80000000` (224 chunks)
-2. Write new bootloader to mtd0
-3. **Keep reservearea intact** (MAC, EEPROM, BOB, calibration)
+### Phase 3: Persist to the Slave Slots Only (reversible)
+Once Phase 2 proves stable:
+1. Full flash dump first: `ATRF 0x0,0xE00000,0x80000000` (224 chunks),
+   verified offline before anything else.
+2. Package the proven image with HDR2 + ECONET CRC32 variant
+   (poly `0xEDB88320`, no final XOR).
+3. Write **only** into `kernel_slave` / `rootfs_slave` / `tclinux_slave`.
+4. Flip the bootflag byte (`ATSW`, or `zycli sys bootflag` from stock). The
+   stock slot stays as the permanent rescue image.
+
+### Hard Invariants
+1. **Never write**: mtd0 (`u-boot` — its tail sector holds the environment),
+   mtd1 (`romfile`), reservearea.
+2. Every flash write is a deliberate, individually authorized operation,
+   preceded by a verified same-day backup.
 
 ### Risks
 1. **No dual-image rollback** if ATSW/bootflag mechanism is lost
 2. **cmdline dependency** — stock kernel expects zloader-injected args
 3. **reservearea destruction** = bricked WiFi + optical calibration
 4. **FIP/zloader version mismatch** = brick (cannot be recovered via UART)
+5. **Environment loss** = defaults on next boot; restoring means rewriting a
+   sector inside mtd0 — the strongest reason it stays backed up and untouched
 
 ---
 
