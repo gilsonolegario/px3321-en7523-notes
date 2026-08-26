@@ -125,9 +125,12 @@ Main Feature Bits      : 00
 
 - `printenv`, `setenv`, `bdinfo`, `version` and all standard U-Boot commands
   are **not available** in ZHAL
-- `ATGU` ("Go back to U-Boot command line mode") exists but does **not** expose
-  standard U-Boot commands — the shell remains `ZHAL>`
-- The only way to interact with flash is through the `AT*` command set
+- **`ATGU` requires TWO keystrokes**: the first reboot drops back into ZHAL;
+  the second drops into the real U-Boot CLI where `setenv`/`saveenv` work
+- The ZHAL shell is **locked by default** — `EngDebugFlag=0x1` or a
+  password challenge (`ATSE`/`ATEN`) is needed for write commands
+- **`ATBT 1`** (block0 write enable) is required before any flash write;
+  without it: "Can't write to protected Flash"
 
 ### Flash Read/Write via ZHAL
 
@@ -140,12 +143,21 @@ ATER x,y      — erase flash region
 ATDU x,y      — dump RAM contents
 ATCB          — copy flash → working buffer
 ATSB          — save working buffer → flash
+ATBT 1        — UNLOCK flash writes (required before ATWF/ATER/ATSB)
 ```
 
 This means we can:
-1. **Dump the entire U-Boot environment** via `ATRF` + `ATDU`
-2. **Read the zloader binary** from flash for reverse engineering
+1. **Dump the entire zloader binary** via `ATRF` + `ATDU`
+2. **Read the U-Boot environment** from flash for reverse engineering
 3. **Write a new bootloader** via `ATWF` (dangerous — no recovery if it fails)
+
+### Dual-Image Swap Flow
+
+```text
+ATBT 1         — unlock block0 writes
+ATSW           — swap bootflag (0↔1)
+ATSR           — reboot to apply
+```
 
 ### Bootflag Mechanism
 
@@ -162,17 +174,61 @@ factory defaults stored in the ROMFILE partition.
 
 ## Implications for Bootloader Replacement
 
-To replace the zloader with standard U-Boot:
+### Upstream U-Boot for EN7523
+
+A 19-patch series by Mikhail Kshevetskiy exists for mainline U-Boot:
+console UART, ethernet/switch, SPI-NAND (non-DMA), clk, reset, DTS,
+and `configs/en7523_evb_defconfig`. Tested on EN7562 but **Linux boot
+not yet verified**. The Airoha ATF-2.3 does not allow easy chain-load —
+the workaround is packaging the new U-Boot as a FIT image disguised as
+a kernel (`type="kernel", os="linux"`, LZMA, entry `0x81e00000`) and
+using `bootm` from the old zloader. This avoids touching the flash.
+
+Reference: `lists.denx.de/u-boot/2025-November/602123.html`
+
+### Community Patches
+
+- **carlicious/zloader** — patched zloader for EX5601: reimplements
+  `get_boot_flag()` ignoring zyfwinfo, makes `ATSW` write only the
+  boot_flag, fixes cmdline search in DTB, keeps engineering mode always on
+- **cjdelisle/ATENv3** — algorithm for `ATEN` password challenge
+- **bmork/zyeng** — unlocks ZHAL via Ethernet without root
+- **OpenWrt PR #20104** — EN7523 carry set (includes PX3321-T1)
+
+### Risks for PX3321-T1
+
+1. Losing `ATSW`/bootflag = no dual-image rollback
+2. Kernel/OpenWrt expects cmdline injected by tcboot (`ethaddr=`,
+   `root=`, GPIO map) — replacement must reproduce this or DTB must
+   be self-sufficient
+3. MT7916 calibration and EN7571 BOB data live in `reservearea` —
+   this partition must survive any bootloader replacement
+4. Mixing zloader version with FIP version = brick
+
+### Safe Testing Path
 
 1. **Dump current zloader**: `ATRF 0x50000,0x4000,0x80000000` then `ATDU`
-2. **Understand the boot handshake**: ZHAL → ATF → zloader → Linux
-3. **The critical interface**: ZHAL passes `bootargs` to Linux (ETHaddr,
-   country_code, GPIO assignments, root device, bootflag)
-4. **Preserve factory data**: reservearea (MAC, EEPROM, calibration) must
-   survive any bootloader replacement
-5. **Dual-image support**: any replacement must implement the bootflag
-   mechanism or the Multiboot upgrade protocol
+2. **Test via chain-load** (no flash write): package new U-Boot as FIT
+   kernel image, load via TFTP (`ATLD`), boot with `ATGO`
+3. **Preserve factory data**: reservearea (MAC, EEPROM, calibration,
+   BOB table) must never be erased
+4. **Keep dual-image**: any replacement must implement bootflag or
+   Multiboot upgrade protocol
 
 ---
 
-*Discovered via UART console, 2026-08-25 session.*
+## References
+
+| Resource | URL |
+|---|---|
+| U-Boot EN7523 upstream series | `lists.denx.de/u-boot/2025-November/602123.html` |
+| carlicious/zloader (EX5601 patches) | `github.com/carlicious/zloader` |
+| cjdelisle/ATENv3 password algo | `github.com/cjdelisle/…` |
+| bmork zyeng (Ethernet unlock) | `github.com/bmork` |
+| OpenWrt EN7523 carry set | PR `openwrt/openwrt#20104` |
+| hack-gpon.org Zyxel unlock | `hack-gpon.org/zyxel` |
+| firmware-utils zytrx (TRX header RE) | `git.openwrt.org` commit `dd6f02a3` |
+
+---
+
+*Discovered via UART console and community research, 2026-08-25 session.*
