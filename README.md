@@ -41,6 +41,11 @@ took the longest to figure out and that nobody had written down.*
 | [`bootloop-forensics.md`](docs/bootloop-forensics.md) | Autopsy of a real kernel-vs-kmods ABI mismatch |
 | [`bootloader-deep-dive.md`](docs/bootloader-deep-dive.md) | ZHAL/zloader/U-Boot complete reference — **`ECNT>` shell**, env block @ `0x70000`, running-loader RAM dumps, replacement strategy |
 | [`recovery.md`](docs/recovery.md) | Serial failsafe, ZHAL + ATENv3, getting out of a brick |
+| [`en7523-uboot-internals.md`](docs/en7523-uboot-internals.md) | Upstream research: mainline U-Boot series, ATF limits, SPI-NAND/SNFI, HDR2 container quirks |
+| [`gpl-source-findings.md`](docs/gpl-source-findings.md) | What the vendor GPL tarball contains — and what Zyxel left out |
+| [`bl-mt798x-dhcpd-analysis.md`](docs/bl-mt798x-dhcpd-analysis.md) | Failsafe **web UI inside U-Boot** (MT798x): DHCPD/DNSD/telnetd/flash editor — and what EN7523 lacks |
+| [`session-findings-2026-08-25.md`](docs/session-findings-2026-08-25.md) | Lab notes 2026-08-25: NPU offload chain & throughput, boot timing, kernel cmdline, UART captures |
+| [`optical-status-page.md`](docs/optical-status-page.md) | Dependency-free optical status page for `uhttpd` (DDMI, TX bias, laser on/off) |
 
 ---
 
