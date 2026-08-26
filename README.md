@@ -39,6 +39,7 @@ took the longest to figure out and that nobody had written down.*
 | [`wifi-calibration.md`](docs/wifi-calibration.md) | MT7916 EEPROM conventions, the *"no precal"* case |
 | [`gpon-next-steps.md`](docs/gpon-next-steps.md) | GPON/xPON bring-up: OMCI, provisioning identity, reaching O5 |
 | [`bootloop-forensics.md`](docs/bootloop-forensics.md) | Autopsy of a real kernel-vs-kmods ABI mismatch |
+| [`uboot-cli-and-env.md`](docs/uboot-cli-and-env.md) | **ECNT> CLI access recipe**, env block @ mtd0 tail (`0x70000`), autoboot RE, "full U-Boot without flashing" strategy |
 | [`recovery.md`](docs/recovery.md) | Serial failsafe, ZHAL + ATENv3, getting out of a brick |
 
 ---
