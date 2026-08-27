@@ -61,6 +61,47 @@ Final XOR:   NONE (this is the key difference from zlib CRC-32C)
 
 **Why no final XOR?** This is an EcoNet protocol compatibility requirement. The standard CRC-32 used in zlib applies `0xFFFFFFFF` XOR at the end; the ECONET variant deliberately omits it.
 
+### FIT image size & common boot traps
+
+The FIT inside either flash bank (`tclinux` / `tclinux_slave`) is **large (~30 MiB)**, not
+the few MB that the *partition* names suggest:
+
+```
+FIT data         = 0x1cd1af7  (~29.8 MiB)   <- first field of tclinux_info
+HDR2 header      = 0x174      (372 B)
+HDR2 + FIT total = 0x1cd1c6b
+page-aligned     = 0x1cd2000  (~30.2 MiB)   <- safe read length
+```
+
+**Trap 1 — don't truncate the FIT.** The `kernel`/`kernel_slave` MTD partition is
+only ~4 MB, but that is *partition size*, **not** the FIT size. The FIT lives inside
+the 48 MiB `tclinux`/`tclinux_slave` bank, at `bank + 0x174`. Reading just 4 MiB
+(`0x401000`) from the bank **truncates** the ~30 MiB FIT: the bootloader finds the
+`HDR2` magic but the internal FIT tree (`images`/`configurations`) is cut short, so
+`bootm` fails with `Wrong Image Type ... / ERROR -91: can't get kernel image!` — even
+though the outer header looks valid. Always read the FIT **fully, page-aligned**, from
+the bank offset (not from the kernel partition).
+
+**Trap 2 — `bootm` needs an 8-aligned address.** The FIT starts at `bank + 0x174`
+and `0x174 % 8 == 4`, so `bootm <bank + 0x174>` fails with `FDT_ERR_ALIGNMENT`.
+Copy the FIT (`bank + 0x174`, `0x1cd1af7` bytes) to an 8-aligned RAM address
+(`cp.b` in U-Boot) before booting it.
+
+A reliable stock-bank boot sequence (no flash write) is:
+
+```
+setenv bootm_low 0x80000000
+setenv bootm_size 0x20000000
+mtd read spi-nand0 0x90000000 <bank-offset>  0x1cd2000   # full HDR2+FIT, page-aligned
+cp.b 0x90000174 0x92000000 0x1cd1af7                    # FIT only -> 8-aligned
+# verify first time: fdt header get totalsize (expect 0x1cd1af7); imi 0x92000000
+bootm 0x92000000
+```
+
+where `<bank-offset>` is `0x0c0000` (primary) or `0x30c0000` (slave). Verify the
+`totalsize` with `fdt header get totalsize` on the first run; if a given unit
+differs, adjust the read/copy lengths accordingly.
+
 ---
 
 ## 3. SPI NAND — SNFI Controller

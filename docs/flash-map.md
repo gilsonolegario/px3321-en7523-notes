@@ -54,6 +54,25 @@ rootfs directly:
 Always address partitions **by name**, never by number: the stock and
 OpenWrt maps shift every index after mtd2.
 
+### OpenWrt **UBI** layout (alternative, proposed)
+
+An alternative mainline layout replaces the dual bank/squashfs map with a single
+**UBI** partition covering the whole user area, holding `ubootenv`, `art` and a
+`fit` volume — the stock OpenWrt x-wrt/UBI style:
+
+| Partition | Offset | Size | Notes |
+|---|---|---|---|
+| `u-boot` | `0x000000` | 1 MiB | read-only |
+| `ubi` | `0x100000` | rest of flash | `compatible = "linux,ubi"` |
+
+Inside the `ubi` volume: `ubootenv` / `ubootenv2` (redundant env), `art`
+(read-only; nvmem MAC/EEPROM) and `fit` (the bootable kernel+rootfs, booted with
+`ubi.block=0,fit root=/dev/fit0 rootwait`).
+
+> **Status: proposed / in validation.** This keeps the SNFI `u-boot` region and
+> replaces the *container* partitions with UBI volumes; it is not yet proven on
+> hardware and may change as bring-up progresses.
+
 ---
 
 [← Back to README](../README.md) · [Vendor tools →](vendor-tools.md)
