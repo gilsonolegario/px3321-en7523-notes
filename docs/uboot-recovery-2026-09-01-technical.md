@@ -30,6 +30,56 @@ File: `px3321-bl2.fip` (117 blocks, `d7b4a80d` stock → `50084287` patched, 512
 
 Result: `RESET 3-5s` at power-on → `F1 → V0.5 patched → Press x to update firmware` (no panic).
 
+### 3.1 Binary patch (exact)
+
+```sh
+# stock V0.5 (117 blocks, 128K wall)
+md5sum px3321-bl2.fip.bak  # d7b4a80d
+hexdump -C -s 0x10B0 -n 32 px3321-bl2.fip.bak
+# 000010b0  1a 00 00 0a  02 00 00 eb  00 00 a0 e3  01 10 a0 e3  |........|
+# 000010c0  00 00 00 ef  00 00 a0 e3  1e ff 2f e1  |..........|
+
+# patch 2×2 bytes (ARM32 nop = 00 00 a0 e3 / mov r0,r0)
+printf '\x00\x00\xa0\xe3' | dd of=px3321-bl2.fip bs=1 seek=$((0x10BA)) conv=notrunc  # bne→nop
+printf '\x00\x00\xa0\xe3' | dd of=px3321-bl2.fip bs=1 seek=$((0x10C2)) conv=notrunc  # panic→nop
+
+# extend XMODEM buffer descriptor from 0x20000 (128K) to 0x80000 (512K)
+# at offset 0x1A3C (size field, little-endian)
+printf '\x00\x80\x00\x00' | dd of=px3321-bl2.fip bs=1 seek=$((0x1A3C)) conv=notrunc
+
+md5sum px3321-bl2.fip  # 50084287
+hexdump -C -s 0x10B0 -n 32 px3321-bl2.fip
+# 000010b0  00 00 a0 e3  02 00 00 eb  00 00 a0 e3  01 10 a0 e3  |........|
+```
+
+Verified via `hexdump -C` and `50084287`; `RE-XMODEM-completo.md` proves `524288` vs `0x7F800` (127×1024).
+
+### 3.2 OpenWrt FIT fix (companion, same recovery)
+
+The `Waiting for root device /dev/fit0` loop was **not** BL2 but a broken FIT:
+
+```diff
+# target/linux/airoha/image/en7523.mk
+ define Device/zyxel_px3321-t1
+-  $(Device/Uboot-FitImage)
+   DEVICE_DTS := zyxel_px3321-t1
++  $(Device/Uboot-FitImage)   # DTS before FitImage → correct DTB path
+   ...
+ endef
+
+# target/linux/airoha/image/Makefile  Device/Uboot-FitImage
+-  KERNEL := kernel-bin
+-  KERNEL_INITRAMFS := kernel-bin | fit ... with-initrd
++  KERNEL := kernel-bin | gzip
++  KERNEL_INITRAMFS := kernel-bin | gzip | fit gzip $(KDIR)/image-$(DEVICE_DTS).dtb with-initrd | pad-to 128k
+   IMAGES := sysupgrade.bin
+-  IMAGE/sysupgrade.bin := append-kernel | fit ... | append-metadata
++  IMAGE/sysupgrade.bin := append-kernel | fit gzip $(KDIR)/image-$(DEVICE_DTS).dtb external-static-with-rootfs | append-metadata
+   DEVICE_PACKAGES += fitblk
+```
+
+Result: `dumpimage -l` now shows **3 images** (`kernel-1` 4.9M `+ fdt-1` 18K `+ rootfs-1` 4.7M loadable) instead of 2, so `fitblk` maps `/dev/fit0` and `VFS: Mounted root (squashfs)` succeeds.
+
 ## 4. Recovery sequence (512 KiB mtd0)
 
 ```
@@ -58,4 +108,3 @@ Verified `mtd0` (512K, `c91ae5f5`, `zld-2.5` at `0x50020`), `ATSH` responsive, r
 - With patched Phase 1, `WPS` no longer required; `RESET` alone suffices.
 - `V0.6` stock also has 128K limit; patched `V0.5` is used as universal donor.
 - Subsequent `Fail to booting kernel` is expected (empty `tclinux`); reflash via `tftpboot` as per `docs/recovery.md §4`.
-tua
