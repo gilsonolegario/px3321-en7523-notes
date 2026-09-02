@@ -98,6 +98,49 @@ The reservearea holds a single ASCII flag byte at offset **+0x200000**
 > the sector must be erased/repaired first. Always verify with a fresh
 > read after writing.
 
+## 4. Mainline U-Boot recovery via TFTP / Xmodem (EN7523, 2026.07)
+
+When the `fit` volume on `ubi` is broken (e.g. FIT with only `kernel+fdt`, no `rootfs` → `fitblk: probe failed error -2` → `Waiting for root device /dev/fit0`), the board still boots to **U-Boot** (`Hit any key to stop autoboot: 3`). Use it to TFTP-boot an `initramfs` into RAM, then `sysupgrade` the corrected FIT.
+
+**TFTP path (preferred — 11.8 MiB/s on this board):**
+
+```text
+U-Boot> setenv serverip 192.168.1.126   # your TFTP server
+U-Boot> setenv ipaddr 192.168.1.200     # free address in same /24
+U-Boot> tftpboot 0x82000000 initramfs.bin   # 9.6M FIT (kernel gzip + fdt)
+Bytes transferred = 10092544 (9a0000 hex)
+U-Boot> bootm 0x82000000
+## Loading kernel ... Verifying Hash Integrity ... OK
+## Loading fdt ... OK
+Starting kernel ...
+# → OpenWrt initramfs at 192.168.1.200
+```
+
+```sh
+# on TFTP server (tftpd-hpa /srv/tftp)
+scp openwrt-airoha-en7523-zyxel_px3321-t1-initramfs-kernel.bin \
+    /srv/tftp/initramfs.bin
+scp openwrt-...-squashfs-sysupgrade.bin /srv/tftp/sysupgrade-new.bin
+
+# on initramfs (root, no password on serial; dropbear needs password)
+scp -O /srv/tftp/sysupgrade-new.bin root@192.168.1.200:/tmp/sysupgrade.bin
+ssh root@192.168.1.200 "md5sum /tmp/sysupgrade.bin; dumpimage -l /tmp/sysupgrade.bin | grep -E 'Image|rootfs'"
+ssh root@192.168.1.200 "sysupgrade -n /tmp/sysupgrade.bin"  # -n wipes overlay
+# → U-Boot now loads 3 images (kernel-1 + fdt-1 + rootfs-1 loadable) from UBI
+```
+
+**Xmodem path (when TFTP is not reachable):**
+
+```text
+U-Boot> loadx 0x82000000   # U-Boot waits for XMODEM
+# on host (lrzsz): sx -X initramfs.bin < /dev/ttyUSB0 > /dev/ttyUSB0
+## Total 10092544 bytes received
+U-Boot> bootm 0x82000000
+```
+
+> [!NOTE]
+> The corrected FIT must have **3 images** (`kernel-1` gzip 4.9M + `fdt-1` 18K + `rootfs-1` 4.7M loadable). Verify with `dumpimage -l` before flashing — the broken FIT with only 2 images triggers the exact `Waiting for root device /dev/fit0` loop.
+
 ## What the console shows when it works
 
 ```text
